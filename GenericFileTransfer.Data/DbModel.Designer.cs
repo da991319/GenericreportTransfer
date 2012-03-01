@@ -18,43 +18,43 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("DbModel", "FK_Column_Report", "Reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GenericFileTransfer.Model.Report), "Columns", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFileTransfer.Model.Column), true)]
+[assembly: EdmRelationshipAttribute("GenericFileModel", "FK_Column_Report", "Reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GenericFileTransfer.Data.Report), "Columns", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFileTransfer.Data.Column), true)]
 
 #endregion
 
-namespace GenericFileTransfer.Model
+namespace GenericFileTransfer.Data
 {
     #region Contexts
     
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class Database : ObjectContext
+    public partial class DbEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new Database object using the connection string found in the 'Database' section of the application configuration file.
+        /// Initializes a new DbEntities object using the connection string found in the 'DbEntities' section of the application configuration file.
         /// </summary>
-        public Database() : base("name=Database", "Database")
+        public DbEntities() : base("name=DbEntities", "DbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new Database object.
+        /// Initialize a new DbEntities object.
         /// </summary>
-        public Database(string connectionString) : base(connectionString, "Database")
+        public DbEntities(string connectionString) : base(connectionString, "DbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new Database object.
+        /// Initialize a new DbEntities object.
         /// </summary>
-        public Database(EntityConnection connection) : base(connection, "Database")
+        public DbEntities(EntityConnection connection) : base(connection, "DbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -132,7 +132,7 @@ namespace GenericFileTransfer.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Column")]
+    [EdmEntityTypeAttribute(NamespaceName="GenericFileModel", Name="Column")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Column : EntityObject
@@ -240,16 +240,16 @@ namespace GenericFileTransfer.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Column_Report", "Reports")]
+        [EdmRelationshipNavigationPropertyAttribute("GenericFileModel", "FK_Column_Report", "Reports")]
         public Report Report
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Column_Report", "Reports").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("GenericFileModel.FK_Column_Report", "Reports").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Column_Report", "Reports").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("GenericFileModel.FK_Column_Report", "Reports").Value = value;
             }
         }
         /// <summary>
@@ -261,13 +261,13 @@ namespace GenericFileTransfer.Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Column_Report", "Reports");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("GenericFileModel.FK_Column_Report", "Reports");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Report>("DbModel.FK_Column_Report", "Reports", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Report>("GenericFileModel.FK_Column_Report", "Reports", value);
                 }
             }
         }
@@ -278,7 +278,7 @@ namespace GenericFileTransfer.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Report")]
+    [EdmEntityTypeAttribute(NamespaceName="GenericFileModel", Name="Report")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Report : EntityObject
@@ -440,18 +440,18 @@ namespace GenericFileTransfer.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Column_Report", "Columns")]
+        [EdmRelationshipNavigationPropertyAttribute("GenericFileModel", "FK_Column_Report", "Columns")]
         public EntityCollection<Column> Columns
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Column>("DbModel.FK_Column_Report", "Columns");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Column>("GenericFileModel.FK_Column_Report", "Columns");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Column>("DbModel.FK_Column_Report", "Columns", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Column>("GenericFileModel.FK_Column_Report", "Columns", value);
                 }
             }
         }

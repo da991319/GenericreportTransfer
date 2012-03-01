@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GenericFileTransferService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" />
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GenericFileTransferService_GetAllReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReports" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_GetAllReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_GetColumnsByReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetColumnsByReport" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_GetColumnsByReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetColumnsByReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertReport" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_DeleteReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReport" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_DeleteReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertColumn_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertColumn" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertColumn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertColumnResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_DeleteColumn_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteColumn" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_DeleteColumn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteColumnResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GenericFileTransferService">
+    <wsdl:operation name="GetAllReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetAllReports" message="tns:GenericFileTransferService_GetAllReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/GetAllReportsResponse" message="tns:GenericFileTransferService_GetAllReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetColumnsByReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetColumnsByReport" message="tns:GenericFileTransferService_GetColumnsByReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/GetColumnsByReportResponse" message="tns:GenericFileTransferService_GetColumnsByReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsertReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertReport" message="tns:GenericFileTransferService_UpsertReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertReportResponse" message="tns:GenericFileTransferService_UpsertReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/DeleteReport" message="tns:GenericFileTransferService_DeleteReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/DeleteReportResponse" message="tns:GenericFileTransferService_DeleteReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsertColumn">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertColumn" message="tns:GenericFileTransferService_UpsertColumn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertColumnResponse" message="tns:GenericFileTransferService_UpsertColumn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteColumn">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/DeleteColumn" message="tns:GenericFileTransferService_DeleteColumn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/DeleteColumnResponse" message="tns:GenericFileTransferService_DeleteColumn_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_GenericFileTransferService" type="tns:GenericFileTransferService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllReports">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/GetAllReports" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetColumnsByReport">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/GetColumnsByReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsertReport">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/UpsertReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReport">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/DeleteReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsertColumn">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/UpsertColumn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteColumn">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/DeleteColumn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GenericFileTransferService">
+    <wsdl:port name="BasicHttpBinding_GenericFileTransferService" binding="tns:BasicHttpBinding_GenericFileTransferService">
+      <soap:address location="http://localhost:49931/GenericFileTransferService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

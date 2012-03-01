@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b36b71bd-cd03-425e-a287-c13bf2b55adc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49931/GenericFileTransferService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GenericFileTransferService.xsd" MetadataType="Schema" ID="4df768d8-2c63-4390-b019-cf45efd717bb" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" />
+    <MetadataFile FileName="GenericFileTransferService1.xsd" MetadataType="Schema" ID="e06cc368-ec94-4ba0-9b72-1ffdd0af46c8" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd3" />
+    <MetadataFile FileName="GenericFileTransferService2.xsd" MetadataType="Schema" ID="ed423b65-425b-4061-a250-d28bba92d1a2" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd4" />
+    <MetadataFile FileName="GenericFileTransferService.wsdl" MetadataType="Wsdl" ID="e0aeb8d2-ca88-40f9-8f20-1477174572a7" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?wsdl" />
+    <MetadataFile FileName="GenericFileTransferService.disco" MetadataType="Disco" ID="aa3edacb-51de-40a5-97d2-115a27c793dc" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?disco" />
+    <MetadataFile FileName="GenericFileTransferService3.xsd" MetadataType="Schema" ID="c0a6f8bf-44ea-4b73-868f-d43be0b7998f" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd0" />
+    <MetadataFile FileName="GenericFileTransferService4.xsd" MetadataType="Schema" ID="63424a3d-6aea-4d6f-9ac9-c7549853b696" SourceId="1" SourceUrl="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

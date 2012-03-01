@@ -4,11 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="DbModelStoreContainer">
-          <EntitySet Name="Columns" EntityType="DbModel.Store.Columns" store:Type="Tables" />
-          <EntitySet Name="Reports" EntityType="DbModel.Store.Reports" store:Type="Tables" />
-          <AssociationSet Name="FK_Column_Report" Association="DbModel.Store.FK_Column_Report">
+      <Schema Namespace="GenericFileModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GenericFileModelStoreContainer">
+          <EntitySet Name="Columns" EntityType="GenericFileModel.Store.Columns" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="GenericFileModel.Store.Reports" store:Type="Tables" />
+          <AssociationSet Name="FK_Column_Report" Association="GenericFileModel.Store.FK_Column_Report">
             <End Role="Reports" EntitySet="Reports" />
             <End Role="Columns" EntitySet="Columns" />
           </AssociationSet>
@@ -32,10 +32,10 @@
           <Property Name="ResultRow" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Column_Report">
-          <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="0..1">
+          <End Role="Reports" Type="GenericFileModel.Store.Reports" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Columns" Type="DbModel.Store.Columns" Multiplicity="*" />
+          <End Role="Columns" Type="GenericFileModel.Store.Columns" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Reports">
               <PropertyRef Name="Id" />
@@ -49,11 +49,11 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Columns" EntityType="DbModel.Column" />
-          <EntitySet Name="Reports" EntityType="DbModel.Report" />
-          <AssociationSet Name="FK_Column_Report" Association="DbModel.FK_Column_Report">
+      <Schema Namespace="GenericFileModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Columns" EntityType="GenericFileModel.Column" />
+          <EntitySet Name="Reports" EntityType="GenericFileModel.Report" />
+          <AssociationSet Name="FK_Column_Report" Association="GenericFileModel.FK_Column_Report">
             <End Role="Reports" EntitySet="Reports" />
             <End Role="Columns" EntitySet="Columns" />
           </AssociationSet>
@@ -65,7 +65,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReportId" Type="Int32" />
           <Property Name="Header" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Report" Relationship="DbModel.FK_Column_Report" FromRole="Columns" ToRole="Reports" />
+          <NavigationProperty Name="Report" Relationship="GenericFileModel.FK_Column_Report" FromRole="Columns" ToRole="Reports" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -76,13 +76,13 @@
           <Property Name="Header" Type="Boolean" Nullable="false" />
           <Property Name="HeaderRow" Type="Int32" Nullable="false" />
           <Property Name="ResultRow" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Columns" Relationship="DbModel.FK_Column_Report" FromRole="Reports" ToRole="Columns" />
+          <NavigationProperty Name="Columns" Relationship="GenericFileModel.FK_Column_Report" FromRole="Reports" ToRole="Columns" />
         </EntityType>
         <Association Name="FK_Column_Report">
-          <End Role="Reports" Type="DbModel.Report" Multiplicity="0..1">
+          <End Role="Reports" Type="GenericFileModel.Report" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Columns" Type="DbModel.Column" Multiplicity="*" />
+          <End Role="Columns" Type="GenericFileModel.Column" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Reports">
               <PropertyRef Name="Id" />
@@ -97,13 +97,13 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="Database">
-          <EntitySetMapping Name="Columns"><EntityTypeMapping TypeName="DbModel.Column"><MappingFragment StoreEntitySet="Columns">
+        <EntityContainerMapping StorageEntityContainer="GenericFileModelStoreContainer" CdmEntityContainer="DbEntities">
+          <EntitySetMapping Name="Columns"><EntityTypeMapping TypeName="GenericFileModel.Column"><MappingFragment StoreEntitySet="Columns">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ReportId" ColumnName="ReportId" />
             <ScalarProperty Name="Header" ColumnName="Header" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Reports"><EntityTypeMapping TypeName="DbModel.Report"><MappingFragment StoreEntitySet="Reports">
+          <EntitySetMapping Name="Reports"><EntityTypeMapping TypeName="GenericFileModel.Report"><MappingFragment StoreEntitySet="Reports">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ReportName" ColumnName="ReportName" />
             <ScalarProperty Name="Header" ColumnName="Header" />
@@ -131,9 +131,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="DbModel">
-        <EntityTypeShape EntityType="DbModel.Column" Width="1.5" PointX="3" PointY="1.125" Height="1.7879850260416672" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbModel.Report" Width="1.5" PointX="0.75" PointY="0.875" Height="2.1725878906249996" IsExpanded="true" />
-        <AssociationConnector Association="DbModel.FK_Column_Report" ManuallyRouted="false">
+        <EntityTypeShape EntityType="GenericFileModel.Column" Width="1.5" PointX="3" PointY="1.125" Height="1.7879850260416672" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenericFileModel.Report" Width="1.5" PointX="0.75" PointY="0.875" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="GenericFileModel.FK_Column_Report" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="2.0189925130208337" />
           <ConnectorPoint PointX="3" PointY="2.0189925130208337" />
         </AssociationConnector>
