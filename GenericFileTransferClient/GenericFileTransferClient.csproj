@@ -75,7 +75,21 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Views\UserControlColumns.xaml.cs">
+      <DependentUpon>UserControlColumns.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlReport.xaml.cs">
+      <DependentUpon>UserControlReport.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\DetailReportView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -83,13 +97,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\DetailReportView.xaml.cs">
+      <DependentUpon>DetailReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControlColumns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
