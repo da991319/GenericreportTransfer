@@ -4,13 +4,24 @@
              xmlns:vm="clr-namespace:GenericFileTransferClient.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:GenericFileTransferClient.Views"
              StartupUri="Views/MainWindow.xaml"
              mc:Ignorable="d">
     
     <Application.Resources>
         <!--Global View Model Locator-->
-        <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+        <!--vm:ViewModelLocator x:Key="Locator"
+                             d:IsDataSource="True" /-->
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DetailReportViewModel}">
+            <views:DetailReportView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:EditReportViewModel}">
+            <views:EditReportView/>
+        </DataTemplate>
+        
     </Application.Resources>
     
 </Application>

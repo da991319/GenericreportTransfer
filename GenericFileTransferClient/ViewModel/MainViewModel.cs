@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -16,28 +17,104 @@ namespace GenericFileTransferClient.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public string Welcome
+        readonly static HomeViewModel _homeViewModel = new HomeViewModel();
+        readonly static DetailReportViewModel _detailReportViewModel = new DetailReportViewModel();
+        readonly static EditReportViewModel _editReportViewModel = new EditReportViewModel();
+
+        private ViewModelBase _currentViewModel;
+
+        public ViewModelBase CurrentViewModel
+        {
+            get { return _currentViewModel; }
+            set {
+                if (_currentViewModel == value)
+                    return;
+                _currentViewModel = value;
+                RaisePropertyChanged("CurrentViewModel");
+            }
+        }
+
+        #region Command
+        
+        private RelayCommand _homeViewCommand;
+
+        public RelayCommand HomeViewCommand
+        {
+            get {
+                if (_homeViewCommand == null)
+                {
+                    _homeViewCommand = new RelayCommand(ExecuteHomeViewCommand, CanExecuteHomeViewCommand);
+                }
+                return _homeViewCommand; }
+        }
+
+        private RelayCommand _detailReportViewCommand;
+
+        public RelayCommand DetailReportViewCommand
+        {
+            get {
+                if (_detailReportViewCommand == null)
+                {
+                    _detailReportViewCommand = new RelayCommand(ExecuteDetailReportViewCommand,CanExecuteDetailReportViewCommand);
+                }
+                return _detailReportViewCommand; }
+        }
+
+        private RelayCommand _editReportViewCommand;
+
+        public RelayCommand EditReportViewCommand
         {
             get
             {
-                return "Welcome to MVVM Light";
+                if (_editReportViewCommand == null)
+                {
+                    _editReportViewCommand = new RelayCommand(ExecuteEditReportViewCommand, CanExecuteEditReportViewCommand);
+                }
+                return _editReportViewCommand;
             }
         }
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            if (IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-            }
-            else
-            {
-                // Code runs "for real"
-            }
+            CurrentViewModel = new HomeViewModel();
         }
+
+        #region command implementation
+        
+        private void ExecuteHomeViewCommand()
+        {
+            CurrentViewModel = _homeViewModel;
+        }
+
+        private bool CanExecuteHomeViewCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteDetailReportViewCommand()
+        {
+            CurrentViewModel = _detailReportViewModel;
+        }
+
+        private bool CanExecuteDetailReportViewCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteEditReportViewCommand()
+        {
+            CurrentViewModel = _editReportViewModel;
+        }
+
+        private bool CanExecuteEditReportViewCommand()
+        {
+            return true;
+        }
+        #endregion
 
         ////public override void Cleanup()
         ////{

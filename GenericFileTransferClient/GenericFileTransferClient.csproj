@@ -73,8 +73,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DetailReportViewModel.cs" />
+    <Compile Include="ViewModel\EditReportViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\DetailReportView.xaml.cs">
+      <DependentUpon>DetailReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditReportView.xaml.cs">
+      <DependentUpon>EditReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControlColumns.xaml.cs">
       <DependentUpon>UserControlColumns.xaml</DependentUpon>
     </Compile>
@@ -82,11 +94,15 @@
       <DependentUpon>UserControlReport.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\DetailReportView.xaml">
-      <SubType>Form</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Home.xaml">
-      <SubType>Form</SubType>
+    <Page Include="Views\EditReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
@@ -96,12 +112,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\DetailReportView.xaml.cs">
-      <DependentUpon>DetailReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

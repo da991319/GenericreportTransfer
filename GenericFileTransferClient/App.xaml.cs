@@ -12,5 +12,6 @@ namespace GenericFileTransferClient
         {
             DispatcherHelper.Initialize();
         }
+
     }
 }

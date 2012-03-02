@@ -1,11 +1,53 @@
-﻿<Window x:Class="GenericFileTransferClient.Views.DetailReportView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        DataContext="{Binding ViewModelName, Source={StaticResource Locator}}">
-
+﻿<UserControl x:Class="GenericFileTransferClient.Views.DetailReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Report Name:"/>
+            <TextBox Text="" Grid.Column="1"/>
+
+            <TextBlock Text="Header:" Grid.Row="1"/>
+            <CheckBox Grid.Column="1" Grid.Row="1"/>
+
+            <TextBlock Text="Row Header:" Grid.Row="2"/>
+            <TextBox Text="" Grid.Column="1" Grid.Row="2"/>
+
+            <TextBlock Text="Row Result:" Grid.Row="3"/>
+            <TextBox Text="" Grid.Column="1" Grid.Row="3"/>
+
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Columns:"/>
+            <DataGrid Grid.Row="1" />
+
+        </Grid>
+
     </Grid>
-</Window>
+</UserControl>

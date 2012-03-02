@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GenericFileTransferClient.Views
 {
     /// <summary>
-    /// Interaction logic for DetailReportView.xaml
+    /// Interaction logic for EditReportView.xaml
     /// </summary>
-    public partial class DetailReportView : UserControl
+    public partial class EditReportView : UserControl
     {
-        public DetailReportView()
+        public EditReportView()
         {
             InitializeComponent();
         }

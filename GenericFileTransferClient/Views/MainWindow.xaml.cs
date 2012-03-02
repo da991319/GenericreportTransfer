@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using GenericFileTransferClient.ViewModel;
 
-namespace GenericFileTransferClient
+namespace GenericFileTransferClient.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -11,10 +11,13 @@ namespace GenericFileTransferClient
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
+        /// 
+        private MainViewModel viewModel = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (s, e) => ViewModelLocator.Cleanup();
+            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
+            //Closing += (s, e) => ViewModelLocator.Cleanup();
         }
     }
 }
