@@ -4,49 +4,48 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GenericFileModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="GenericFileModelStoreContainer">
-          <EntitySet Name="Columns" EntityType="GenericFileModel.Store.Columns" store:Type="Tables" />
-          <EntitySet Name="Reports" EntityType="GenericFileModel.Store.Reports" store:Type="Tables" />
-          <AssociationSet Name="FK_Column_Report" Association="GenericFileModel.Store.FK_Column_Report">
-            <End Role="Reports" EntitySet="Reports" />
-            <End Role="Columns" EntitySet="Columns" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Columns">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ReportId" Type="int" />
-          <Property Name="Header" Type="nvarchar" Nullable="false" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Reports">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ReportName" Type="nvarchar" Nullable="false" MaxLength="200" />
-          <Property Name="Header" Type="bit" Nullable="false" />
-          <Property Name="HeaderRow" Type="int" Nullable="false" />
-          <Property Name="ResultRow" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Column_Report">
-          <End Role="Reports" Type="GenericFileModel.Store.Reports" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Columns" Type="GenericFileModel.Store.Columns" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reports">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Columns">
-              <PropertyRef Name="ReportId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="GenericFileModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="GenericFileModelStoreContainer">
+    <EntitySet Name="Columns" EntityType="GenericFileModel.Store.Columns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reports" EntityType="GenericFileModel.Store.Reports" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Column_Report" Association="GenericFileModel.Store.FK_Column_Report">
+      <End Role="Reports" EntitySet="Reports" />
+      <End Role="Columns" EntitySet="Columns" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Columns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportId" Type="int" Nullable="true" />
+    <Property Name="Header" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportName" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Header" Type="bit" Nullable="false" />
+    <Property Name="HeaderRow" Type="int" Nullable="false" />
+    <Property Name="ResultRow" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Column_Report">
+    <End Role="Reports" Type="GenericFileModel.Store.Reports" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Columns" Type="GenericFileModel.Store.Columns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reports">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Columns">
+        <PropertyRef Name="ReportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GenericFileModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -96,23 +95,30 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GenericFileModelStoreContainer" CdmEntityContainer="DbEntities">
-          <EntitySetMapping Name="Columns"><EntityTypeMapping TypeName="GenericFileModel.Column"><MappingFragment StoreEntitySet="Columns">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="ReportId" ColumnName="ReportId" />
-            <ScalarProperty Name="Header" ColumnName="Header" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Reports"><EntityTypeMapping TypeName="GenericFileModel.Report"><MappingFragment StoreEntitySet="Reports">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="ReportName" ColumnName="ReportName" />
-            <ScalarProperty Name="Header" ColumnName="Header" />
-            <ScalarProperty Name="HeaderRow" ColumnName="HeaderRow" />
-            <ScalarProperty Name="ResultRow" ColumnName="ResultRow" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GenericFileModelStoreContainer" CdmEntityContainer="DbEntities">
+    <EntitySetMapping Name="Columns">
+      <EntityTypeMapping TypeName="IsTypeOf(GenericFileModel.Column)">
+        <MappingFragment StoreEntitySet="Columns">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="IsTypeOf(GenericFileModel.Report)">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="HeaderRow" ColumnName="HeaderRow" />
+          <ScalarProperty Name="ResultRow" ColumnName="ResultRow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">

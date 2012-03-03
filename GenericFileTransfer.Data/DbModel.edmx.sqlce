@@ -1,0 +1,68 @@
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server Compact Edition
+-- --------------------------------------------------
+-- Date Created: 03/02/2012 21:38:24
+-- Generated from EDMX file: C:\Users\regis\Documents\Visual Studio 2010\Projects\branch\GenericFileTransfer\GenericFileTransfer.Data\DbModel.edmx
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'Columns'
+CREATE TABLE [Columns] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ReportId] int  NULL,
+    [Header] nvarchar(100)  NOT NULL
+);
+GO
+
+-- Creating table 'Reports'
+CREATE TABLE [Reports] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ReportName] nvarchar(200)  NOT NULL,
+    [Header] bit  NOT NULL,
+    [HeaderRow] int  NOT NULL,
+    [ResultRow] int  NOT NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [Id] in table 'Columns'
+ALTER TABLE [Columns]
+ADD CONSTRAINT [PK_Columns]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Reports'
+ALTER TABLE [Reports]
+ADD CONSTRAINT [PK_Reports]
+    PRIMARY KEY ([Id] );
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- Creating foreign key on [ReportId] in table 'Columns'
+ALTER TABLE [Columns]
+ADD CONSTRAINT [FK_Column_Report]
+    FOREIGN KEY ([ReportId])
+    REFERENCES [Reports]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Column_Report'
+CREATE INDEX [IX_FK_Column_Report]
+ON [Columns]
+    ([ReportId]);
+GO
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------

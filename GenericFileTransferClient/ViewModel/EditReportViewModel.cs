@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
+using GenericFileTransferClient.GenericFileTransferService;
+using System.Collections.ObjectModel;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -16,19 +18,33 @@ namespace GenericFileTransferClient.ViewModel
     /// </summary>
     public class EditReportViewModel : ViewModelBase
     {
+        private GenericFileTransferServiceClient serviceClient = new GenericFileTransferServiceClient();
+        private Report _currentReport;
+
+        public Report CurrentReport
+        {
+            get { return _currentReport; }
+            set { _currentReport = value; RaisePropertyChanged("CurrentReport"); }
+        }
+
+        private ObservableCollection<Report> _reports;
+
+        public ObservableCollection<Report> Reports
+        {
+            get { return _reports; }
+        }
+
         /// <summary>
         /// Initializes a new instance of the EditReportViewModel class.
         /// </summary>
         public EditReportViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real": Connect to service, etc...
-            ////}
+            LoadEvents();
+        }
+
+        private void LoadEvents()
+        {
+            _reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
         }
 
         ////public override void Cleanup()
