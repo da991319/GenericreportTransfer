@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:GenericFileTransferClient.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <ComboBox Grid.ColumnSpan="1"/>
+        <ComboBox Grid.ColumnSpan="1" ItemsSource="{Binding Reports}"
+                  DisplayMemberPath="ReportName"/>
         <views:DetailReportView Grid.Row="1"/>
             
     </Grid>

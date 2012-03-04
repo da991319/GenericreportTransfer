@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GenericFile.DataService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
   <xs:complexType name="ArrayOfReport">
     <xs:sequence>
@@ -17,6 +17,7 @@
           <xs:element minOccurs="0" name="Id" type="xs:int" />
           <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="ResultRow" type="xs:int" />
+          <xs:element minOccurs="0" name="Separator" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -34,9 +35,10 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="Header" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Position" type="xs:int" />
           <xs:element minOccurs="0" name="Report" nillable="true" type="tns:Report" />
-          <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:int" />
-          <xs:element minOccurs="0" name="ReportReference" nillable="true" type="q2:EntityReferenceOfReport6W5yNmin" />
+          <xs:element minOccurs="0" name="ReportId" type="xs:int" />
+          <xs:element minOccurs="0" name="ReportReference" nillable="true" type="q2:EntityReferenceOfReportJhU6VumU" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

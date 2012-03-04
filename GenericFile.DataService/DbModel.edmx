@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DbModelStoreContainer">
           <EntitySet Name="Columns" EntityType="DbModel.Store.Columns" store:Type="Tables" />
           <EntitySet Name="Reports" EntityType="DbModel.Store.Reports" store:Type="Tables" />
@@ -20,6 +20,7 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ReportId" Type="int" Nullable="false" />
           <Property Name="Header" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Position" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reports">
           <Key>
@@ -30,6 +31,7 @@
           <Property Name="Header" Type="bit" Nullable="false" />
           <Property Name="HeaderRow" Type="int" Nullable="false" />
           <Property Name="ResultRow" Type="int" Nullable="false" />
+          <Property Name="Separator" Type="nvarchar" Nullable="false" MaxLength="5" />
         </EntityType>
         <Association Name="FK-Columns_Reporst">
           <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="1">
@@ -45,8 +47,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -66,6 +67,7 @@
           <Property Name="ReportId" Type="Int32" Nullable="false" />
           <Property Name="Header" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Report" Relationship="DbModel.FK_Columns_Reporst" FromRole="Columns" ToRole="Reports" />
+          <Property Type="Int32" Name="Position" Nullable="false" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -77,6 +79,7 @@
           <Property Name="HeaderRow" Type="Int32" Nullable="false" />
           <Property Name="ResultRow" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Columns" Relationship="DbModel.FK_Columns_Reporst" FromRole="Reports" ToRole="Columns" />
+          <Property Type="String" Name="Separator" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Columns_Reporst">
           <End Role="Reports" Type="DbModel.Report" Multiplicity="1">
@@ -99,12 +102,14 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="DbEntities">
           <EntitySetMapping Name="Columns"><EntityTypeMapping TypeName="DbModel.Column"><MappingFragment StoreEntitySet="Columns">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ReportId" ColumnName="ReportId" />
             <ScalarProperty Name="Header" ColumnName="Header" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Reports"><EntityTypeMapping TypeName="DbModel.Report"><MappingFragment StoreEntitySet="Reports">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Separator" ColumnName="Separator" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ReportName" ColumnName="ReportName" />
             <ScalarProperty Name="Header" ColumnName="Header" />
             <ScalarProperty Name="HeaderRow" ColumnName="HeaderRow" />

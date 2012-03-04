@@ -18,8 +18,8 @@ namespace GenericFileTransferClient.ViewModel
     public class MainViewModel : ViewModelBase
     {
         readonly static HomeViewModel _homeViewModel = new HomeViewModel();
-        readonly static DetailReportViewModel _detailReportViewModel = new DetailReportViewModel();
-        readonly static EditReportViewModel _editReportViewModel = new EditReportViewModel();
+        readonly DetailReportViewModel _detailReportViewModel = new DetailReportViewModel();
+        
 
         private ViewModelBase _currentViewModel;
 
@@ -73,6 +73,7 @@ namespace GenericFileTransferClient.ViewModel
                 return _editReportViewCommand;
             }
         }
+
         #endregion
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace GenericFileTransferClient.ViewModel
 
         private void ExecuteDetailReportViewCommand()
         {
-            CurrentViewModel = _detailReportViewModel;
+            CurrentViewModel = new DetailReportViewModel(Mode.Add);
         }
 
         private bool CanExecuteDetailReportViewCommand()
@@ -107,13 +108,14 @@ namespace GenericFileTransferClient.ViewModel
 
         private void ExecuteEditReportViewCommand()
         {
-            CurrentViewModel = _editReportViewModel;
+            CurrentViewModel = new DetailReportViewModel(Mode.Edit);
         }
 
         private bool CanExecuteEditReportViewCommand()
         {
             return true;
         }
+
         #endregion
 
         ////public override void Cleanup()

@@ -145,12 +145,14 @@ namespace GenericFile.DataService
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="reportId">Initial value of the ReportId property.</param>
         /// <param name="header">Initial value of the Header property.</param>
-        public static Column CreateColumn(global::System.Int32 id, global::System.Int32 reportId, global::System.String header)
+        /// <param name="position">Initial value of the Position property.</param>
+        public static Column CreateColumn(global::System.Int32 id, global::System.Int32 reportId, global::System.String header, global::System.Int32 position)
         {
             Column column = new Column();
             column.Id = id;
             column.ReportId = reportId;
             column.Header = header;
+            column.Position = position;
             return column;
         }
 
@@ -231,6 +233,30 @@ namespace GenericFile.DataService
         private global::System.String _Header;
         partial void OnHeaderChanging(global::System.String value);
         partial void OnHeaderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Position
+        {
+            get
+            {
+                return _Position;
+            }
+            set
+            {
+                OnPositionChanging(value);
+                ReportPropertyChanging("Position");
+                _Position = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Position");
+                OnPositionChanged();
+            }
+        }
+        private global::System.Int32 _Position;
+        partial void OnPositionChanging(global::System.Int32 value);
+        partial void OnPositionChanged();
 
         #endregion
     
@@ -295,7 +321,8 @@ namespace GenericFile.DataService
         /// <param name="header">Initial value of the Header property.</param>
         /// <param name="headerRow">Initial value of the HeaderRow property.</param>
         /// <param name="resultRow">Initial value of the ResultRow property.</param>
-        public static Report CreateReport(global::System.Int32 id, global::System.String reportName, global::System.Boolean header, global::System.Int32 headerRow, global::System.Int32 resultRow)
+        /// <param name="separator">Initial value of the Separator property.</param>
+        public static Report CreateReport(global::System.Int32 id, global::System.String reportName, global::System.Boolean header, global::System.Int32 headerRow, global::System.Int32 resultRow, global::System.String separator)
         {
             Report report = new Report();
             report.Id = id;
@@ -303,6 +330,7 @@ namespace GenericFile.DataService
             report.Header = header;
             report.HeaderRow = headerRow;
             report.ResultRow = resultRow;
+            report.Separator = separator;
             return report;
         }
 
@@ -431,6 +459,30 @@ namespace GenericFile.DataService
         private global::System.Int32 _ResultRow;
         partial void OnResultRowChanging(global::System.Int32 value);
         partial void OnResultRowChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Separator
+        {
+            get
+            {
+                return _Separator;
+            }
+            set
+            {
+                OnSeparatorChanging(value);
+                ReportPropertyChanging("Separator");
+                _Separator = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Separator");
+                OnSeparatorChanged();
+            }
+        }
+        private global::System.String _Separator;
+        partial void OnSeparatorChanging(global::System.String value);
+        partial void OnSeparatorChanged();
 
         #endregion
     

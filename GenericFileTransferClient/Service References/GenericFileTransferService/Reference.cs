@@ -15,12 +15,12 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Report", Namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Report", Namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Report : GenericFileTransferClient.GenericFileTransferService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GenericFileTransferClient.GenericFileTransferService.Column[] ColumnsField;
+        private System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> ColumnsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool HeaderField;
@@ -37,8 +37,11 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ResultRowField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SeparatorField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GenericFileTransferClient.GenericFileTransferService.Column[] Columns {
+        public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> Columns {
             get {
                 return this.ColumnsField;
             }
@@ -114,6 +117,19 @@ namespace GenericFileTransferClient.GenericFileTransferService {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Separator {
+            get {
+                return this.SeparatorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeparatorField, value) != true)) {
+                    this.SeparatorField = value;
+                    this.RaisePropertyChanged("Separator");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -175,7 +191,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Column", Namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Column", Namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Column : GenericFileTransferClient.GenericFileTransferService.EntityObject {
         
@@ -186,13 +202,16 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GenericFileTransferClient.GenericFileTransferService.Report ReportField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> ReportIdField;
+        private int ReportIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReport6W5yNmin ReportReferenceField;
+        private GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU ReportReferenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Header {
@@ -221,6 +240,19 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Position {
+            get {
+                return this.PositionField;
+            }
+            set {
+                if ((this.PositionField.Equals(value) != true)) {
+                    this.PositionField = value;
+                    this.RaisePropertyChanged("Position");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public GenericFileTransferClient.GenericFileTransferService.Report Report {
             get {
                 return this.ReportField;
@@ -234,7 +266,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> ReportId {
+        public int ReportId {
             get {
                 return this.ReportIdField;
             }
@@ -247,7 +279,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReport6W5yNmin ReportReference {
+        public GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU ReportReference {
             get {
                 return this.ReportReferenceField;
             }
@@ -273,7 +305,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         private string EntityContainerNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GenericFileTransferClient.GenericFileTransferService.EntityKeyMember[] EntityKeyValuesField;
+        private System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.EntityKeyMember> EntityKeyValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EntitySetNameField;
@@ -302,7 +334,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GenericFileTransferClient.GenericFileTransferService.EntityKeyMember[] EntityKeyValues {
+        public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.EntityKeyMember> EntityKeyValues {
             get {
                 return this.EntityKeyValuesField;
             }
@@ -341,17 +373,17 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Report>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.StructuralObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReport6W5yNmin))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReference))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.RelatedEnd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityKey))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityKeyMember[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.EntityKeyMember>))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -411,16 +443,16 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfReport6W5yNmin", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfReportJhU6VumU", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOfReport6W5yNmin : GenericFileTransferClient.GenericFileTransferService.EntityReference {
+    public partial class EntityReferenceOfReportJhU6VumU : GenericFileTransferClient.GenericFileTransferService.EntityReference {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReport6W5yNmin))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU))]
     public partial class EntityReference : GenericFileTransferClient.GenericFileTransferService.RelatedEnd {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -445,7 +477,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReference))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReport6W5yNmin))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU))]
     public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -476,10 +508,10 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     public interface GenericFileTransferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/GetAllReports", ReplyAction="http://tempuri.org/GenericFileTransferService/GetAllReportsResponse")]
-        GenericFileTransferClient.GenericFileTransferService.Report[] GetAllReports();
+        System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Report> GetAllReports();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/GetColumnsByReport", ReplyAction="http://tempuri.org/GenericFileTransferService/GetColumnsByReportResponse")]
-        GenericFileTransferClient.GenericFileTransferService.Column[] GetColumnsByReport(System.Guid reportId);
+        System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> GetColumnsByReport(int reportId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/UpsertReport", ReplyAction="http://tempuri.org/GenericFileTransferService/UpsertReportResponse")]
         void UpsertReport(GenericFileTransferClient.GenericFileTransferService.Report report);
@@ -521,11 +553,11 @@ namespace GenericFileTransferClient.GenericFileTransferService {
                 base(binding, remoteAddress) {
         }
         
-        public GenericFileTransferClient.GenericFileTransferService.Report[] GetAllReports() {
+        public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Report> GetAllReports() {
             return base.Channel.GetAllReports();
         }
         
-        public GenericFileTransferClient.GenericFileTransferService.Column[] GetColumnsByReport(System.Guid reportId) {
+        public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> GetColumnsByReport(int reportId) {
             return base.Channel.GetColumnsByReport(reportId);
         }
         

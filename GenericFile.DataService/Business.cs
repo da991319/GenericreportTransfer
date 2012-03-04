@@ -10,7 +10,7 @@ namespace GenericFile.DataService
             return CRUD.GetAllReports();
         }
 
-        public static List<Column> GetColumnsByReport(Guid reportId)
+        public static List<Column> GetColumnsByReport(int reportId)
         {
             return CRUD.GetColumnsByReport(reportId);
         }

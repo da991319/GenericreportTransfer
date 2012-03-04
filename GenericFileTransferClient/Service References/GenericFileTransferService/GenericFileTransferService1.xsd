@@ -18,11 +18,11 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="StructuralObject" nillable="true" type="tns:StructuralObject" />
-  <xs:complexType name="EntityReferenceOfReport6W5yNmin">
+  <xs:complexType name="EntityReferenceOfReportJhU6VumU">
     <xs:annotation>
       <xs:appinfo>
         <GenericType Name="EntityReferenceOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
-          <GenericParameter Name="Report" Namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" />
+          <GenericParameter Name="Report" Namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
         </GenericType>
       </xs:appinfo>
     </xs:annotation>
@@ -32,7 +32,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="EntityReferenceOfReport6W5yNmin" nillable="true" type="tns:EntityReferenceOfReport6W5yNmin" />
+  <xs:element name="EntityReferenceOfReportJhU6VumU" nillable="true" type="tns:EntityReferenceOfReportJhU6VumU" />
   <xs:complexType name="EntityReference">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RelatedEnd">

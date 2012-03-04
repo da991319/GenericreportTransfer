@@ -34,15 +34,27 @@ namespace GenericFileTransferClient.ViewModel
             get { return _reports; }
         }
 
+        //set the mode of the detail page
+        public Mode Mode { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the EditReportViewModel class.
         /// </summary>
-        public EditReportViewModel()
+        public EditReportViewModel(Mode mode)
         {
-            LoadEvents();
+            Mode = mode;
+            if (mode.Equals(ViewModel.Mode.Edit))
+            {
+                LoadReports();
+            }
+            
         }
 
-        private void LoadEvents()
+        public EditReportViewModel()
+        {
+        }
+
+        private void LoadReports()
         {
             _reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
         }

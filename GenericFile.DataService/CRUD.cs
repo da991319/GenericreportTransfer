@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 
 namespace GenericFile.DataService
 {
@@ -16,7 +17,7 @@ namespace GenericFile.DataService
             }
         }
 
-        public static List<Column> GetColumnsByReport(Guid reportId)
+        public static List<Column> GetColumnsByReport(int reportId)
         {
             using (DbEntities db = new DbEntities())
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Linq;
 
 namespace GenericFile.DataService
 {
@@ -14,7 +15,7 @@ namespace GenericFile.DataService
         }
 
         [OperationContract]
-        public List<Column> GetColumnsByReport(Guid reportId)
+        public List<Column> GetColumnsByReport(int reportId)
         {
             return Business.GetColumnsByReport(reportId);
         }

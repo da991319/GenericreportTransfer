@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" />
+      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
       <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
       <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>

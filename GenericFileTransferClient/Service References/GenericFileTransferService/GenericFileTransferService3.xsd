@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" />
-  <xs:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
   <xs:element name="GetAllReports">
     <xs:complexType>
       <xs:sequence />
@@ -10,28 +9,28 @@
   <xs:element name="GetAllReportsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="GetAllReportsResult" nillable="true" type="q1:ArrayOfReport" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="GetAllReportsResult" nillable="true" type="q1:ArrayOfReport" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetColumnsByReport">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="reportId" type="q2:guid" />
+        <xs:element minOccurs="0" name="reportId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetColumnsByReportResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="GetColumnsByReportResult" nillable="true" type="q3:ArrayOfColumn" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="GetColumnsByReportResult" nillable="true" type="q2:ArrayOfColumn" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpsertReport">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="report" nillable="true" type="q4:Report" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="report" nillable="true" type="q3:Report" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -43,7 +42,7 @@
   <xs:element name="DeleteReport">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="report" nillable="true" type="q5:Report" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="report" nillable="true" type="q4:Report" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -55,7 +54,7 @@
   <xs:element name="UpsertColumn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="column" nillable="true" type="q6:Column" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="column" nillable="true" type="q5:Column" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -67,7 +66,7 @@
   <xs:element name="DeleteColumn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/GenericFileTransfer.Data" minOccurs="0" name="column" nillable="true" type="q7:Column" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="column" nillable="true" type="q6:Column" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
