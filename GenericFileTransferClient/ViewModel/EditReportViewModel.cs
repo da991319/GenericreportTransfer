@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GenericFileTransferClient.GenericFileTransferService;
 using System.Collections.ObjectModel;
 
