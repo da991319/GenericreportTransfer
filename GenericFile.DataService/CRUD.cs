@@ -51,8 +51,9 @@ namespace GenericFile.DataService
         {
             using (DbEntities db = new DbEntities())
             {
+                db.Attach(report);
                 db.Reports.DeleteObject(report);
-                //db.ObjectStateManager.ChangeObjectState(report, System.Data.EntityState.Deleted);
+                db.ObjectStateManager.ChangeObjectState(report, System.Data.EntityState.Deleted);
                 return db.SaveChanges();
             }
         }

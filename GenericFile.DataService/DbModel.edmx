@@ -31,7 +31,9 @@
           <Property Name="Header" Type="bit" Nullable="false" />
           <Property Name="HeaderRow" Type="int" Nullable="false" />
           <Property Name="ResultRow" Type="int" Nullable="false" />
-          <Property Name="Separator" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="Separator" Type="nvarchar" MaxLength="5" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SheetName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK-Columns_Reporst">
           <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="1">
@@ -79,13 +81,16 @@
           <Property Name="HeaderRow" Type="Int32" Nullable="false" />
           <Property Name="ResultRow" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Columns" Relationship="DbModel.FK_Columns_Reporst" FromRole="Reports" ToRole="Columns" />
-          <Property Type="String" Name="Separator" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Separator" Nullable="true" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FileName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SheetName" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Columns_Reporst">
           <End Role="Reports" Type="DbModel.Report" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Columns" Type="DbModel.Column" Multiplicity="*" />
+          <End Role="Columns" Type="DbModel.Column" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Reports">
               <PropertyRef Name="Id" />
@@ -108,7 +113,9 @@
             <ScalarProperty Name="Header" ColumnName="Header" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Reports"><EntityTypeMapping TypeName="DbModel.Report"><MappingFragment StoreEntitySet="Reports">
-            <ScalarProperty Name="Separator" ColumnName="Separator" />
+            <ScalarProperty Name="SheetName" ColumnName="SheetName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Separator" ColumnName="Separator" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ReportName" ColumnName="ReportName" />
             <ScalarProperty Name="Header" ColumnName="Header" />

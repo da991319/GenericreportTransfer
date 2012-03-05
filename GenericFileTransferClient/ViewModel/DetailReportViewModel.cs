@@ -29,7 +29,7 @@ namespace GenericFileTransferClient.ViewModel
             get { return _currentReport; }
             set { _currentReport = value; 
                 RaisePropertyChanged("CurrentReport");
-                if (Mode.Equals(ViewModel.Mode.Edit))
+                if (Mode.Equals(ViewModel.Mode.Edit) && value != null)
                 {
                     LoadColumns();
                 }
@@ -42,14 +42,20 @@ namespace GenericFileTransferClient.ViewModel
         public ObservableCollection<Report> Reports
         {
             get { return _reports; }
+
+            set
+            {
+                _reports = value;
+                RaisePropertyChanged("Reports");
+            }
         }
 
-        private ObservableCollection<Column> _columns;
+        //private ObservableCollection<Column> _columns;
 
-        public ObservableCollection<Column> Columns
-        {
-            get { return _columns; }
-        }
+        //public ObservableCollection<Column> Columns
+        //{
+        //    get { return _columns; }
+        //}
 
         private string _filePath;
 
@@ -59,8 +65,7 @@ namespace GenericFileTransferClient.ViewModel
             set { _filePath = value; RaisePropertyChanged("FilePath"); }
         }
         
-        
-        public Mode Mode { get; set; }
+        public Mode Mode { get; set; } 
 
         #region Commands
         private RelayCommand _browseCommand;
@@ -77,19 +82,33 @@ namespace GenericFileTransferClient.ViewModel
             }
         }
 
-        private RelayCommand _createReportCommand;
+        private RelayCommand _saveReportCommand;
 
-        public RelayCommand CreateReportCommand
+        public RelayCommand SaveReportCommand
         {
             get {
-                if (_createReportCommand == null)
+                if (_saveReportCommand == null)
                 {
-                    _createReportCommand = new RelayCommand(ExecuteCreateReportCommand, CanExecuteCreateReportCommand);
-                } 
-                return _createReportCommand;
+                    _saveReportCommand = new RelayCommand(ExecuteSaveReportCommand, CanExecuteSaveReportCommand);
+                }
+                return _saveReportCommand;
             }
             
         }
+
+        private RelayCommand _deleteReportCommand;
+
+        public RelayCommand DeleteReportCommand
+        {
+            get {
+                if (_deleteReportCommand == null)
+                {
+                    _deleteReportCommand = new RelayCommand(ExecuteDeleteReportCommand, CanExecuteDeleteReportCommand);
+                }
+                return _deleteReportCommand;
+            }
+        }
+        
         
         #endregion
 
@@ -97,11 +116,10 @@ namespace GenericFileTransferClient.ViewModel
         
         private void ExecuteBrowseCommand()
         {
-            
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".csv"; // Default file extension
-            dlg.Filter = "Text documents (.csv)|*.csv"; // Filter files by extension
+            dlg.DefaultExt = ".csv|*.xls|*.xlsx"; // Default file extension
+            dlg.Filter = "Text documents (.csv)|*.csv|Excel documents (*.xls, *.xlsx)|*.xls;*.xlsx"; // Filter files by extension
 
             // Show open file dialog box
             System.Nullable<bool> result = dlg.ShowDialog();
@@ -110,7 +128,7 @@ namespace GenericFileTransferClient.ViewModel
             if (result == true)
             {
                 // Open document
-                FilePath = dlg.FileName;
+                FilePath  = dlg.FileName;
             }
         }
 
@@ -119,32 +137,52 @@ namespace GenericFileTransferClient.ViewModel
             return true;
         }
 
-        private void ExecuteCreateReportCommand()
+        private void ExecuteSaveReportCommand()
         {
-            
-            //get the list of headers and column number
-            Dictionary<int, string> headers = Utils.UploadReport(FilePath, CurrentReport.Separator);
-
-            List<Column> listColumns = new ObservableCollection<Column>(headers.Select(k => new Column
+            Report tempReport = CurrentReport;
+            if (Mode.Equals(ViewModel.Mode.Add))
             {
-                Position = k.Key,
-                Header = k.Value,
-                
-            })).ToList();
+                //get the list of headers and column number
+                Dictionary<int, string> headers = Utils.GetHeaders(FilePath, CurrentReport.Separator,CurrentReport.HeaderRow,CurrentReport.SheetName);
 
-            //create report
-            Report tempReport = new Report
-            {
-                Columns = listColumns,
-                Header = CurrentReport.Header,
-                HeaderRow = CurrentReport.HeaderRow,
-                ResultRow = CurrentReport.ResultRow,
-                ReportName = CurrentReport.ReportName,
-                Separator = CurrentReport.Separator
-            };
+                List<Column> listColumns = new ObservableCollection<Column>(headers.Select(k => new Column
+                {
+                    Position = k.Key,
+                    Header = k.Value,
+
+                })).ToList();
+
+                tempReport.Columns = listColumns;
+                tempReport.FileName = Utils.GetFileName(FilePath);
+            }
+            //save report
+            serviceClient.UpsertReport(tempReport);
+
+            //save template
+            Utils.SaveTemplateFile(FilePath);
         }
 
-        private bool CanExecuteCreateReportCommand()
+        private bool CanExecuteSaveReportCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteDeleteReportCommand()
+        {
+            //get file name
+            string fileName = CurrentReport.FileName;
+
+            serviceClient.DeleteReport(CurrentReport);
+            
+            //delete template
+            Utils.DeleteTemplate(fileName);
+
+            CurrentReport = null;
+            //update combobox datasource
+            LoadReports();
+        }
+
+        private bool CanExecuteDeleteReportCommand()
         {
             return true;
         }
@@ -170,13 +208,14 @@ namespace GenericFileTransferClient.ViewModel
 
         private void LoadReports()
         {
-            _reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
+            //_reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
+            Reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
         }
 
         private void LoadColumns()
         {
             //Columns = new ObservableCollection<Column>(serviceClient.GetColumnsByReport(CurrentReport.Id));
-            _columns = new ObservableCollection<Column>(serviceClient.GetColumnsByReport(CurrentReport.Id));
+            CurrentReport.Columns = serviceClient.GetColumnsByReport(CurrentReport.Id);
         }
         ////public override void Cleanup()
         ////{

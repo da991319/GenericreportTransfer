@@ -321,8 +321,7 @@ namespace GenericFile.DataService
         /// <param name="header">Initial value of the Header property.</param>
         /// <param name="headerRow">Initial value of the HeaderRow property.</param>
         /// <param name="resultRow">Initial value of the ResultRow property.</param>
-        /// <param name="separator">Initial value of the Separator property.</param>
-        public static Report CreateReport(global::System.Int32 id, global::System.String reportName, global::System.Boolean header, global::System.Int32 headerRow, global::System.Int32 resultRow, global::System.String separator)
+        public static Report CreateReport(global::System.Int32 id, global::System.String reportName, global::System.Boolean header, global::System.Int32 headerRow, global::System.Int32 resultRow)
         {
             Report report = new Report();
             report.Id = id;
@@ -330,7 +329,6 @@ namespace GenericFile.DataService
             report.Header = header;
             report.HeaderRow = headerRow;
             report.ResultRow = resultRow;
-            report.Separator = separator;
             return report;
         }
 
@@ -463,7 +461,7 @@ namespace GenericFile.DataService
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Separator
         {
@@ -475,7 +473,7 @@ namespace GenericFile.DataService
             {
                 OnSeparatorChanging(value);
                 ReportPropertyChanging("Separator");
-                _Separator = StructuralObject.SetValidValue(value, false);
+                _Separator = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Separator");
                 OnSeparatorChanged();
             }
@@ -483,6 +481,54 @@ namespace GenericFile.DataService
         private global::System.String _Separator;
         partial void OnSeparatorChanging(global::System.String value);
         partial void OnSeparatorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FileName
+        {
+            get
+            {
+                return _FileName;
+            }
+            set
+            {
+                OnFileNameChanging(value);
+                ReportPropertyChanging("FileName");
+                _FileName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FileName");
+                OnFileNameChanged();
+            }
+        }
+        private global::System.String _FileName;
+        partial void OnFileNameChanging(global::System.String value);
+        partial void OnFileNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SheetName
+        {
+            get
+            {
+                return _SheetName;
+            }
+            set
+            {
+                OnSheetNameChanging(value);
+                ReportPropertyChanging("SheetName");
+                _SheetName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SheetName");
+                OnSheetNameChanged();
+            }
+        }
+        private global::System.String _SheetName;
+        partial void OnSheetNameChanging(global::System.String value);
+        partial void OnSheetNameChanged();
 
         #endregion
     

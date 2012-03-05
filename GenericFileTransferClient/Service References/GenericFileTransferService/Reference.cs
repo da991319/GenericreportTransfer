@@ -23,6 +23,9 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         private System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> ColumnsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool HeaderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -40,6 +43,9 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SeparatorField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SheetNameField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column> Columns {
             get {
@@ -49,6 +55,19 @@ namespace GenericFileTransferClient.GenericFileTransferService {
                 if ((object.ReferenceEquals(this.ColumnsField, value) != true)) {
                     this.ColumnsField = value;
                     this.RaisePropertyChanged("Columns");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
                 }
             }
         }
@@ -127,6 +146,19 @@ namespace GenericFileTransferClient.GenericFileTransferService {
                 if ((object.ReferenceEquals(this.SeparatorField, value) != true)) {
                     this.SeparatorField = value;
                     this.RaisePropertyChanged("Separator");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SheetName {
+            get {
+                return this.SheetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SheetNameField, value) != true)) {
+                    this.SheetNameField = value;
+                    this.RaisePropertyChanged("SheetName");
                 }
             }
         }

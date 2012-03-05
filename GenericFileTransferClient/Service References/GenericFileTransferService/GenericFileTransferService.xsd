@@ -12,12 +12,14 @@
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q1:EntityObject">
         <xs:sequence>
           <xs:element minOccurs="0" name="Columns" nillable="true" type="tns:ArrayOfColumn" />
+          <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Header" type="xs:boolean" />
           <xs:element minOccurs="0" name="HeaderRow" type="xs:int" />
           <xs:element minOccurs="0" name="Id" type="xs:int" />
           <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="ResultRow" type="xs:int" />
           <xs:element minOccurs="0" name="Separator" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SheetName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
