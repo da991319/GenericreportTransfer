@@ -20,6 +20,8 @@
           <xs:element minOccurs="0" name="ResultRow" type="xs:int" />
           <xs:element minOccurs="0" name="Separator" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="SheetName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Transfers" nillable="true" type="tns:ArrayOfTransfer" />
+          <xs:element minOccurs="0" name="Transfers1" nillable="true" type="tns:ArrayOfTransfer" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -41,9 +43,39 @@
           <xs:element minOccurs="0" name="Report" nillable="true" type="tns:Report" />
           <xs:element minOccurs="0" name="ReportId" type="xs:int" />
           <xs:element minOccurs="0" name="ReportReference" nillable="true" type="q2:EntityReferenceOfReportJhU6VumU" />
+          <xs:element minOccurs="0" name="Transfers" nillable="true" type="tns:ArrayOfTransfer" />
+          <xs:element minOccurs="0" name="Transfers1" nillable="true" type="tns:ArrayOfTransfer" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Column" nillable="true" type="tns:Column" />
+  <xs:complexType name="ArrayOfTransfer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Transfer" nillable="true" type="tns:Transfer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransfer" nillable="true" type="tns:ArrayOfTransfer" />
+  <xs:complexType name="Transfer">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q3:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Column" nillable="true" type="tns:Column" />
+          <xs:element minOccurs="0" name="Column1" nillable="true" type="tns:Column" />
+          <xs:element minOccurs="0" name="Column1Reference" nillable="true" type="q3:EntityReferenceOfColumnJhU6VumU" />
+          <xs:element minOccurs="0" name="ColumnFromId" type="xs:int" />
+          <xs:element minOccurs="0" name="ColumnReference" nillable="true" type="q3:EntityReferenceOfColumnJhU6VumU" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Report" nillable="true" type="tns:Report" />
+          <xs:element minOccurs="0" name="Report1" nillable="true" type="tns:Report" />
+          <xs:element minOccurs="0" name="Report1Reference" nillable="true" type="q3:EntityReferenceOfReportJhU6VumU" />
+          <xs:element minOccurs="0" name="ReportFromId" type="xs:int" />
+          <xs:element minOccurs="0" name="ReportReference" nillable="true" type="q3:EntityReferenceOfReportJhU6VumU" />
+          <xs:element minOccurs="0" name="ReportToId" type="xs:int" />
+          <xs:element minOccurs="0" name="columnToId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Transfer" nillable="true" type="tns:Transfer" />
 </xs:schema>

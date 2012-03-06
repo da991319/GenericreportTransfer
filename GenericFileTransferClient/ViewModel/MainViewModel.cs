@@ -19,7 +19,7 @@ namespace GenericFileTransferClient.ViewModel
     {
         readonly static HomeViewModel _homeViewModel = new HomeViewModel();
         readonly DetailReportViewModel _detailReportViewModel = new DetailReportViewModel();
-        
+        readonly TransferViewModel _transferViewModel = new TransferViewModel();
 
         private ViewModelBase _currentViewModel;
 
@@ -74,6 +74,19 @@ namespace GenericFileTransferClient.ViewModel
             }
         }
 
+        private RelayCommand _TransferViewCommand;
+
+        public RelayCommand TransferViewCommand
+        {
+            get
+            {
+                if (_TransferViewCommand == null)
+                {
+                    _TransferViewCommand = new RelayCommand(ExecuteTransferViewCommand, CanExecuteTransferViewCommand);
+                }
+                return _TransferViewCommand;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -112,6 +125,16 @@ namespace GenericFileTransferClient.ViewModel
         }
 
         private bool CanExecuteEditReportViewCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteTransferViewCommand()
+        {
+            CurrentViewModel = _transferViewModel;
+        }
+
+        private bool CanExecuteTransferViewCommand()
         {
             return true;
         }

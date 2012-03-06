@@ -19,6 +19,10 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("DbModel", "FK_Columns_Reporst", "Reports", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GenericFile.DataService.Report), "Columns", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFile.DataService.Column), true)]
+[assembly: EdmRelationshipAttribute("DbModel", "Fk_Transfer_Column", "Column", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GenericFile.DataService.Column), "Transfer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFile.DataService.Transfer), true)]
+[assembly: EdmRelationshipAttribute("DbModel", "FK_Transfer_Column2", "Column", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GenericFile.DataService.Column), "Transfer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFile.DataService.Transfer), true)]
+[assembly: EdmRelationshipAttribute("DbModel", "FK_Transfer_Report", "Report", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GenericFile.DataService.Report), "Transfer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFile.DataService.Transfer), true)]
+[assembly: EdmRelationshipAttribute("DbModel", "FK_Transfer_Report2", "Report", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GenericFile.DataService.Report), "Transfer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GenericFile.DataService.Transfer), true)]
 
 #endregion
 
@@ -101,6 +105,22 @@ namespace GenericFile.DataService
             }
         }
         private ObjectSet<Report> _Reports;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Transfer> Transfers
+        {
+            get
+            {
+                if ((_Transfers == null))
+                {
+                    _Transfers = base.CreateObjectSet<Transfer>("Transfers");
+                }
+                return _Transfers;
+            }
+        }
+        private ObjectSet<Transfer> _Transfers;
 
         #endregion
         #region AddTo Methods
@@ -119,6 +139,14 @@ namespace GenericFile.DataService
         public void AddToReports(Report report)
         {
             base.AddObject("Reports", report);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Transfers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTransfers(Transfer transfer)
+        {
+            base.AddObject("Transfers", transfer);
         }
 
         #endregion
@@ -296,6 +324,50 @@ namespace GenericFile.DataService
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Report>("DbModel.FK_Columns_Reporst", "Reports", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "Fk_Transfer_Column", "Transfer")]
+        public EntityCollection<Transfer> Transfers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Transfer>("DbModel.Fk_Transfer_Column", "Transfer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Transfer>("DbModel.Fk_Transfer_Column", "Transfer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Column2", "Transfer")]
+        public EntityCollection<Transfer> Transfers1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Transfer>("DbModel.FK_Transfer_Column2", "Transfer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Transfer>("DbModel.FK_Transfer_Column2", "Transfer", value);
                 }
             }
         }
@@ -552,6 +624,364 @@ namespace GenericFile.DataService
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Column>("DbModel.FK_Columns_Reporst", "Columns", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Report", "Transfer")]
+        public EntityCollection<Transfer> Transfers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Transfer>("DbModel.FK_Transfer_Report", "Transfer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Transfer>("DbModel.FK_Transfer_Report", "Transfer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Report2", "Transfer")]
+        public EntityCollection<Transfer> Transfers1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Transfer>("DbModel.FK_Transfer_Report2", "Transfer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Transfer>("DbModel.FK_Transfer_Report2", "Transfer", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Transfer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Transfer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Transfer object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="columnFromId">Initial value of the ColumnFromId property.</param>
+        /// <param name="columnToId">Initial value of the columnToId property.</param>
+        /// <param name="reportFromId">Initial value of the ReportFromId property.</param>
+        /// <param name="reportToId">Initial value of the ReportToId property.</param>
+        public static Transfer CreateTransfer(global::System.Int32 id, global::System.Int32 columnFromId, global::System.Int32 columnToId, global::System.Int32 reportFromId, global::System.Int32 reportToId)
+        {
+            Transfer transfer = new Transfer();
+            transfer.Id = id;
+            transfer.ColumnFromId = columnFromId;
+            transfer.columnToId = columnToId;
+            transfer.ReportFromId = reportFromId;
+            transfer.ReportToId = reportToId;
+            return transfer;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ColumnFromId
+        {
+            get
+            {
+                return _ColumnFromId;
+            }
+            set
+            {
+                OnColumnFromIdChanging(value);
+                ReportPropertyChanging("ColumnFromId");
+                _ColumnFromId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ColumnFromId");
+                OnColumnFromIdChanged();
+            }
+        }
+        private global::System.Int32 _ColumnFromId;
+        partial void OnColumnFromIdChanging(global::System.Int32 value);
+        partial void OnColumnFromIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 columnToId
+        {
+            get
+            {
+                return _columnToId;
+            }
+            set
+            {
+                OncolumnToIdChanging(value);
+                ReportPropertyChanging("columnToId");
+                _columnToId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("columnToId");
+                OncolumnToIdChanged();
+            }
+        }
+        private global::System.Int32 _columnToId;
+        partial void OncolumnToIdChanging(global::System.Int32 value);
+        partial void OncolumnToIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ReportFromId
+        {
+            get
+            {
+                return _ReportFromId;
+            }
+            set
+            {
+                OnReportFromIdChanging(value);
+                ReportPropertyChanging("ReportFromId");
+                _ReportFromId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReportFromId");
+                OnReportFromIdChanged();
+            }
+        }
+        private global::System.Int32 _ReportFromId;
+        partial void OnReportFromIdChanging(global::System.Int32 value);
+        partial void OnReportFromIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ReportToId
+        {
+            get
+            {
+                return _ReportToId;
+            }
+            set
+            {
+                OnReportToIdChanging(value);
+                ReportPropertyChanging("ReportToId");
+                _ReportToId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReportToId");
+                OnReportToIdChanged();
+            }
+        }
+        private global::System.Int32 _ReportToId;
+        partial void OnReportToIdChanging(global::System.Int32 value);
+        partial void OnReportToIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "Fk_Transfer_Column", "Column")]
+        public Column Column
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.Fk_Transfer_Column", "Column").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.Fk_Transfer_Column", "Column").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Column> ColumnReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.Fk_Transfer_Column", "Column");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Column>("DbModel.Fk_Transfer_Column", "Column", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Column2", "Column")]
+        public Column Column1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.FK_Transfer_Column2", "Column").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.FK_Transfer_Column2", "Column").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Column> Column1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Column>("DbModel.FK_Transfer_Column2", "Column");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Column>("DbModel.FK_Transfer_Column2", "Column", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Report", "Report")]
+        public Report Report
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report", "Report").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report", "Report").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Report> ReportReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report", "Report");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Report>("DbModel.FK_Transfer_Report", "Report", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DbModel", "FK_Transfer_Report2", "Report")]
+        public Report Report1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report2", "Report").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report2", "Report").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Report> Report1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Report>("DbModel.FK_Transfer_Report2", "Report");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Report>("DbModel.FK_Transfer_Report2", "Report", value);
                 }
             }
         }

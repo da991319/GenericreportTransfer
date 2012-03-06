@@ -8,6 +8,23 @@
         <EntityContainer Name="DbModelStoreContainer">
           <EntitySet Name="Columns" EntityType="DbModel.Store.Columns" store:Type="Tables" />
           <EntitySet Name="Reports" EntityType="DbModel.Store.Reports" store:Type="Tables" />
+          <EntitySet Name="Transfers" EntityType="DbModel.Store.Transfers" store:Type="Tables" />
+          <AssociationSet Name="Fk_Transfer_Column" Association="DbModel.Store.Fk_Transfer_Column">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Column2" Association="DbModel.Store.FK_Transfer_Column2">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Report" Association="DbModel.Store.FK_Transfer_Report">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Report2" Association="DbModel.Store.FK_Transfer_Report2">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
           <AssociationSet Name="FK-Columns_Reporst" Association="DbModel.Store.FK-Columns_Reporst">
             <End Role="Reports" EntitySet="Reports" />
             <End Role="Columns" EntitySet="Columns" />
@@ -35,6 +52,64 @@
           <Property Name="FileName" Type="nvarchar" MaxLength="100" />
           <Property Name="SheetName" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Transfers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ColumnFromId" Type="int" Nullable="false" />
+          <Property Name="columnToId" Type="int" Nullable="false" />
+          <Property Name="ReportFromId" Type="int" Nullable="false" />
+          <Property Name="ReportToId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Fk_Transfer_Column">
+          <End Role="Columns" Type="DbModel.Store.Columns" Multiplicity="1" />
+          <End Role="Transfers" Type="DbModel.Store.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="ColumnFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Column2">
+          <End Role="Columns" Type="DbModel.Store.Columns" Multiplicity="1" />
+          <End Role="Transfers" Type="DbModel.Store.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="columnToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Report">
+          <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="1" />
+          <End Role="Transfers" Type="DbModel.Store.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="ReportFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Report2">
+          <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="1" />
+          <End Role="Transfers" Type="DbModel.Store.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="ReportToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK-Columns_Reporst">
           <End Role="Reports" Type="DbModel.Store.Reports" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -60,6 +135,23 @@
             <End Role="Reports" EntitySet="Reports" />
             <End Role="Columns" EntitySet="Columns" />
           </AssociationSet>
+          <EntitySet Name="Transfers" EntityType="DbModel.Transfer" />
+          <AssociationSet Name="Fk_Transfer_Column" Association="DbModel.Fk_Transfer_Column">
+            <End Role="Column" EntitySet="Columns" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Column2" Association="DbModel.FK_Transfer_Column2">
+            <End Role="Column" EntitySet="Columns" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Report" Association="DbModel.FK_Transfer_Report">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Report2" Association="DbModel.FK_Transfer_Report2">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Column">
           <Key>
@@ -70,6 +162,8 @@
           <Property Name="Header" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Report" Relationship="DbModel.FK_Columns_Reporst" FromRole="Columns" ToRole="Reports" />
           <Property Type="Int32" Name="Position" Nullable="false" />
+          <NavigationProperty Name="Transfers" Relationship="DbModel.Fk_Transfer_Column" FromRole="Column" ToRole="Transfer" />
+          <NavigationProperty Name="Transfers1" Relationship="DbModel.FK_Transfer_Column2" FromRole="Column" ToRole="Transfer" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -84,6 +178,8 @@
           <Property Type="String" Name="Separator" Nullable="true" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FileName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="SheetName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Transfers" Relationship="DbModel.FK_Transfer_Report" FromRole="Report" ToRole="Transfer" />
+          <NavigationProperty Name="Transfers1" Relationship="DbModel.FK_Transfer_Report2" FromRole="Report" ToRole="Transfer" />
         </EntityType>
         <Association Name="FK_Columns_Reporst">
           <End Role="Reports" Type="DbModel.Report" Multiplicity="1">
@@ -97,6 +193,68 @@
             </Principal>
             <Dependent Role="Columns">
               <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ColumnFromId" Nullable="false" />
+          <Property Type="Int32" Name="columnToId" Nullable="false" />
+          <NavigationProperty Name="Column" Relationship="DbModel.Fk_Transfer_Column" FromRole="Transfer" ToRole="Column" />
+          <NavigationProperty Name="Column1" Relationship="DbModel.FK_Transfer_Column2" FromRole="Transfer" ToRole="Column" />
+          <Property Type="Int32" Name="ReportFromId" Nullable="false" />
+          <Property Type="Int32" Name="ReportToId" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="DbModel.FK_Transfer_Report" FromRole="Transfer" ToRole="Report" />
+          <NavigationProperty Name="Report1" Relationship="DbModel.FK_Transfer_Report2" FromRole="Transfer" ToRole="Report" />
+        </EntityType>
+        <Association Name="Fk_Transfer_Column">
+          <End Type="DbModel.Column" Role="Column" Multiplicity="1" />
+          <End Type="DbModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="ColumnFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Column2">
+          <End Type="DbModel.Column" Role="Column" Multiplicity="1" />
+          <End Type="DbModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="columnToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Report">
+          <End Type="DbModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="DbModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="ReportFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Report2">
+          <End Type="DbModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="DbModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="ReportToId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -122,6 +280,17 @@
             <ScalarProperty Name="HeaderRow" ColumnName="HeaderRow" />
             <ScalarProperty Name="ResultRow" ColumnName="ResultRow" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Transfers">
+            <EntityTypeMapping TypeName="DbModel.Transfer">
+              <MappingFragment StoreEntitySet="Transfers">
+                <ScalarProperty Name="ReportToId" ColumnName="ReportToId" />
+                <ScalarProperty Name="ReportFromId" ColumnName="ReportFromId" />
+                <ScalarProperty Name="columnToId" ColumnName="columnToId" />
+                <ScalarProperty Name="ColumnFromId" ColumnName="ColumnFromId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -146,8 +315,25 @@
         <EntityTypeShape EntityType="DbModel.Column" Width="1.5" PointX="3" PointY="1.125" Height="1.7879850260416672" IsExpanded="true" />
         <EntityTypeShape EntityType="DbModel.Report" Width="1.5" PointX="0.75" PointY="0.875" Height="2.1725878906249996" IsExpanded="true" />
         <AssociationConnector Association="DbModel.FK_Columns_Reporst" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.0189925130208337" />
-          <ConnectorPoint PointX="3" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="2.25" PointY="2.3074446614583337" />
+          <ConnectorPoint PointX="3" PointY="2.3074446614583337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="DbModel.Transfer" Width="1.5" PointX="5.25" PointY="1.375" Height="1.9802864583333326" />
+        <AssociationConnector Association="DbModel.Fk_Transfer_Column" >
+          <ConnectorPoint PointX="4.5" PointY="2.780926920572917" />
+          <ConnectorPoint PointX="5.25" PointY="2.780926920572917" />
+        </AssociationConnector>
+        <AssociationConnector Association="DbModel.FK_Transfer_Column2" >
+          <ConnectorPoint PointX="4.5" PointY="2.0154634602864583" />
+          <ConnectorPoint PointX="5.25" PointY="2.0154634602864583" />
+        </AssociationConnector>
+        <AssociationConnector Association="DbModel.FK_Transfer_Report" >
+          <ConnectorPoint PointX="2.25" PointY="3.7807421875" />
+          <ConnectorPoint PointX="5.25" PointY="3.7807421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="DbModel.FK_Transfer_Report2" >
+          <ConnectorPoint PointX="2.25" PointY="3.6040657552083335" />
+          <ConnectorPoint PointX="5.25" PointY="3.6040657552083335" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

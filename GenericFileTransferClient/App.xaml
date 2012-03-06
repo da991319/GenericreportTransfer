@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type vm:DetailReportViewModel}">
             <views:DetailReportView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TransferViewModel}">
+            <views:TransferView/>
+        </DataTemplate>
                 
     </Application.Resources>
     

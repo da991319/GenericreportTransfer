@@ -88,12 +88,16 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Mode.cs" />
+    <Compile Include="ViewModel\TransferViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\DetailReportView.xaml.cs">
       <DependentUpon>DetailReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransferView.xaml.cs">
+      <DependentUpon>TransferView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlColumns.xaml.cs">
       <DependentUpon>UserControlColumns.xaml</DependentUpon>
@@ -124,6 +128,10 @@
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TransferView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControlColumns.xaml">
       <SubType>Designer</SubType>

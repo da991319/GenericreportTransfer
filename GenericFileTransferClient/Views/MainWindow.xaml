@@ -14,7 +14,7 @@
                 <MenuItem Header="Home" Command="{Binding HomeViewCommand}"/>
                 <MenuItem Header="New" Command="{Binding DetailReportViewCommand}"/>
                 <MenuItem Header="Edit" Command="{Binding EditReportViewCommand}"/>
-                <MenuItem Header="Transfer"/>
+                <MenuItem Header="Transfer" Command="{Binding TransferViewCommand}"/>
             </MenuItem>
         </Menu>
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"></ContentControl>

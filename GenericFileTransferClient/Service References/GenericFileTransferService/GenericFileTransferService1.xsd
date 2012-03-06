@@ -47,4 +47,19 @@
     <xs:sequence />
   </xs:complexType>
   <xs:element name="RelatedEnd" nillable="true" type="tns:RelatedEnd" />
+  <xs:complexType name="EntityReferenceOfColumnJhU6VumU">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="EntityReferenceOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="Column" Namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityReference">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntityReferenceOfColumnJhU6VumU" nillable="true" type="tns:EntityReferenceOfColumnJhU6VumU" />
 </xs:schema>
