@@ -75,4 +75,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTransferMapping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="reportFromId" type="xs:int" />
+        <xs:element minOccurs="0" name="reportToId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTransferMappingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="GetTransferMappingResult" nillable="true" type="q7:ArrayOfTransfer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

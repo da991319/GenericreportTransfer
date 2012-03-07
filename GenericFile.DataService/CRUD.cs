@@ -87,5 +87,13 @@ namespace GenericFile.DataService
                 return db.SaveChanges();
             }
         }
+
+        public static List<Transfer> GetTransferMapping(int reportFromId, int reportToId)
+        {
+            using (DbEntities db = new DbEntities())
+            {
+                return db.Transfers.Where(t => t.ReportFromId.Equals(reportFromId) && t.ReportToId.Equals(reportToId)).ToList();
+            }
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GenericFileTransferClient.GenericFileTransferService;
-using System.Collections.Generic;
 using System.Linq;
+using GalaSoft.MvvmLight;
+using GenericFileTransferClient.GenericFileTransferService;
+using GenericFileTransferClient.Model;
+using GalaSoft.MvvmLight.Command;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -21,6 +23,8 @@ namespace GenericFileTransferClient.ViewModel
     public class TransferViewModel : ViewModelBase
     {
         private GenericFileTransferServiceClient serviceClient = new GenericFileTransferServiceClient();
+
+        private List<Transfer> _transferViewModelList;
 
         private ObservableCollection<Report> _reportsFrom;
 
@@ -70,6 +74,7 @@ namespace GenericFileTransferClient.ViewModel
                 _selectedReportFrom.Columns = LoadColumns(_selectedReportFrom.Id);
                 //check for combined List
                 FillCombinedList();
+                RaisePropertyChanged("SelectedReportFrom");
             }
         }
 
@@ -82,18 +87,52 @@ namespace GenericFileTransferClient.ViewModel
                 _selectReportTo.Columns = LoadColumns(_selectReportTo.Id);
                 //check for combined List
                 FillCombinedList();
+                RaisePropertyChanged("SelectedReportTo");
             }
         }
 
-        private Transfer _combinedList;
+        private ObservableCollection<TransferModel> _listMappingFrom;
 
-        public Transfer CombinedList
+        public ObservableCollection<TransferModel> ListMappingFrom
         {
-            get { return _combinedList; }
-            set { _combinedList = value; }
+            get { return _listMappingFrom; }
+            set { _listMappingFrom = value; RaisePropertyChanged("ListMappingFrom"); }
         }
-        
-        
+
+        private ObservableCollection<TransferModel> _listMappingTo;
+
+        public ObservableCollection<TransferModel> ListMappingTo
+        {
+            get { return _listMappingTo; }
+            set { _listMappingTo = value; RaisePropertyChanged("ListMappingTo"); }
+        }
+
+        private RelayCommand _saveMappings;
+
+        public RelayCommand  SaveMappings
+        {
+            get
+            {
+                if (_saveMappings == null)
+                {
+                    _saveMappings = new RelayCommand(ExecuteSaveMappingsCommand, CanExecuteSaveMappingsCommand);
+                }
+                return _saveMappings;
+            }
+        }
+
+
+        private void ExecuteSaveMappingsCommand()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private bool CanExecuteSaveMappingsCommand()
+        {
+            return true;
+        }
+
+
         /// <summary>
         /// Initializes a new instance of the TransferViewModel class.
         /// </summary>
@@ -104,20 +143,47 @@ namespace GenericFileTransferClient.ViewModel
 
         private void LoadReports()
         {
-            //ObservableCollection<Report> tempList = new ObservableCollection<Report>(serviceClient.GetAllReports());
-            //ReportsFrom = tempList;
-            //ReportsTo = tempList;
             Reports = new ObservableCollection<Report>(serviceClient.GetAllReports());
         }
 
         private List<Column> LoadColumns(int reportId)
         {
-            return serviceClient.GetColumnsByReport(reportId);
+            return serviceClient.GetColumnsByReport(reportId); 
         }
 
         private void FillCombinedList()
         {
-            throw new System.NotImplementedException();
+            if (SelectedReportFrom != null && SelectedReportTo != null)
+            {
+                _transferViewModelList = serviceClient.GetTransferMapping(SelectedReportFrom.Id, SelectedReportTo.Id);
+
+                if (_transferViewModelList.Count != 0)
+                {
+                    ListMappingFrom = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel{
+                        ColumnId = t.ColumnFromId
+                    }).ToList());
+
+                    ListMappingTo = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel
+                    {
+                        ColumnId = t.ColumnFromId
+                    }).ToList());
+                }
+                else
+                {
+                    //we don't want the empty row to be displayed as a row
+                    ListMappingFrom = new ObservableCollection<TransferModel>(SelectedReportFrom.Columns.Where(c => !c.Position.Equals(-1))
+                        .Select(c => new TransferModel
+                    {
+                        ColumnId = c.Id
+                    }).ToList());
+
+                    ListMappingTo = new ObservableCollection<TransferModel>(SelectedReportTo.Columns.Where(c => !c.Position.Equals(-1))
+                        .Select(c => new TransferModel
+                    {
+                        ColumnId = c.Id
+                    }).ToList());
+                }
+            }
         }
 
         ////public override void Cleanup()

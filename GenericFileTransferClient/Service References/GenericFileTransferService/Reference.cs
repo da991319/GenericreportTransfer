@@ -849,6 +849,9 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/DeleteColumn", ReplyAction="http://tempuri.org/GenericFileTransferService/DeleteColumnResponse")]
         void DeleteColumn(GenericFileTransferClient.GenericFileTransferService.Column column);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/GetTransferMapping", ReplyAction="http://tempuri.org/GenericFileTransferService/GetTransferMappingResponse")]
+        System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> GetTransferMapping(int reportFromId, int reportToId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -900,6 +903,10 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         public void DeleteColumn(GenericFileTransferClient.GenericFileTransferService.Column column) {
             base.Channel.DeleteColumn(column);
+        }
+        
+        public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> GetTransferMapping(int reportFromId, int reportToId) {
+            return base.Channel.GetTransferMapping(reportFromId, reportToId);
         }
     }
 }

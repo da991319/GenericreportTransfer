@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\TransferModel.cs" />
     <Compile Include="Service References\GenericFileTransferService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +173,9 @@
     <None Include="Service References\GenericFileTransferService\GenericFileTransferClient.GenericFileTransferService.Report.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\GenericFileTransferService\GenericFileTransferClient.GenericFileTransferService.Transfer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\GenericFileTransferService\GenericFileTransferService.wsdl" />
     <None Include="Service References\GenericFileTransferService\GenericFileTransferService.xsd">
       <SubType>Designer</SubType>
@@ -190,7 +194,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Template\" />
   </ItemGroup>
   <ItemGroup>

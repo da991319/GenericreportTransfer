@@ -9,24 +9,18 @@ namespace GenericFileTransferClient.Model
 {
     public class TransferModel : INotifyPropertyChanged
     {
-        private List<Column> _columnsFrom;
+        private int _columnId;
 
-        public List<Column> ColumnsFrom
+        public int ColumnId
         {
-            get { return _columnsFrom; }
-            set { _columnsFrom = value; }
-        }
-
-        private List<Column> _columnsTo;
-
-        public List<Column> ColumnsTo
-        {
-            get { return _columnsTo; }
-            set { _columnsTo = value; }
+            get { return _columnId; }
+            set { _columnId = value; OnPropertyChanged("ColumnId"); }
         }
         
+        public TransferModel()
+        {
 
-
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region Private Members

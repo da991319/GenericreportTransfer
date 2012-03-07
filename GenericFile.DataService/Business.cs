@@ -34,5 +34,10 @@ namespace GenericFile.DataService
         {
             CRUD.DeleteColumn(column);
         }
+
+        public static List<Transfer> GetTransferMappping(int reportFromId, int reportToId)
+        {
+            return CRUD.GetTransferMapping(reportFromId, reportToId);
+        }
     }
 }

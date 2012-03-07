@@ -44,5 +44,11 @@ namespace GenericFile.DataService
             Business.DeleteColumn(column);
         }
 
+        [OperationContract]
+        public List<Transfer> GetTransferMapping(int reportFromId, int reportToId)
+        {
+            return Business.GetTransferMappping(reportFromId,reportToId);
+        }
+
     } 
 }

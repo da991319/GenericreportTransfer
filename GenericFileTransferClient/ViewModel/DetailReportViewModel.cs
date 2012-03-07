@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using GenericFileTransferClient.GenericFileTransferService;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight.Command;
-using System.Collections.Generic;
 using System.Linq;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GenericFileTransferClient.GenericFileTransferService;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -151,6 +151,9 @@ namespace GenericFileTransferClient.ViewModel
                     Header = k.Value,
 
                 })).ToList();
+
+                //always add an empty column
+                listColumns.Add(new Column() { Position = -1, Header = "N/A" });
 
                 tempReport.Columns = listColumns;
                 tempReport.FileName = Utils.GetFileName(FilePath);
