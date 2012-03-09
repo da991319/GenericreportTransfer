@@ -64,7 +64,10 @@
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="test" Grid.Row="4" Command="{Binding SaveMappings}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2">
+            <Button Content="Save"  Command="{Binding SaveMappings}"/>
+            <Button Content="Execute" Command="{Binding ExecuteTransfer}"/>
+            </StackPanel>
         </Grid>
         
     </Grid>

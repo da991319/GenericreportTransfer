@@ -92,7 +92,30 @@ namespace GenericFile.DataService
         {
             using (DbEntities db = new DbEntities())
             {
-                return db.Transfers.Where(t => t.ReportFromId.Equals(reportFromId) && t.ReportToId.Equals(reportToId)).ToList();
+                var results = db.Transfers.Where(t => t.ReportFromId.Equals(reportFromId) && t.ReportToId.Equals(reportToId)).ToList();
+                results.ForEach(t => db.Detach(t));
+                return results;
+            }
+        }
+
+        public static int UpsertTransfer(List<Transfer> transfers)
+        {
+            using (DbEntities db = new DbEntities())
+            {
+                foreach (Transfer transfer in transfers)
+                {
+                    if (transfer.EntityKey == null)
+	                {
+                        db.Transfers.AddObject(transfer);
+	                }
+                    else
+                    {
+                        db.Attach(transfer);
+                        db.ObjectStateManager.ChangeObjectState(transfer, System.Data.EntityState.Modified);
+                    }
+                }
+
+                return db.SaveChanges();
             }
         }
     }

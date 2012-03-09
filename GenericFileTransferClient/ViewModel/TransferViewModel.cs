@@ -121,10 +121,40 @@ namespace GenericFileTransferClient.ViewModel
             }
         }
 
+        private RelayCommand _executeTransfer;
+
+        public RelayCommand ExecuteTransfer
+        {
+            get
+            {
+                if (_executeTransfer == null)
+                {
+                    _executeTransfer = new RelayCommand(ExecuteTransferCommand, CanExecuteTransferCommand);
+                }
+                return _executeTransfer;
+            }
+        }
+        
+        private void ExecuteTransferCommand()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private bool CanExecuteTransferCommand()
+        {
+            return true;
+        }
 
         private void ExecuteSaveMappingsCommand()
         {
-            throw new System.NotImplementedException();
+            List<Transfer> listTransfer = new List<Transfer>();
+            foreach (TransferModel tm in ListMappingTo)
+            {
+                _transferViewModelList.Where(t => t.columnToId.Equals(tm.ColumnId)).FirstOrDefault().ColumnFromId = ListMappingFrom[ListMappingTo.IndexOf(tm)].ColumnId;
+               
+            }
+
+            serviceClient.UpsertTransfer(_transferViewModelList);
         }
 
         private bool CanExecuteSaveMappingsCommand()
@@ -165,7 +195,7 @@ namespace GenericFileTransferClient.ViewModel
 
                     ListMappingTo = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel
                     {
-                        ColumnId = t.ColumnFromId
+                        ColumnId = t.columnToId
                     }).ToList());
                 }
                 else

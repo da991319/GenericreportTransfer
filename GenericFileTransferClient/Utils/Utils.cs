@@ -5,6 +5,7 @@ using Microsoft.VisualBasic.FileIO;
 using NPOI.HSSF;
 using NPOI.HSSF.UserModel;
 using OfficeOpenXml;
+using GenericFileTransferClient.GenericFileTransferService;
 
 namespace GenericFileTransferClient
 {
@@ -104,6 +105,24 @@ namespace GenericFileTransferClient
             }
             return tempList;
         }
+
+        public static void ExecuteTransfer(Report reportFrom, Report reportTo, List<int> columnIdsFrom, List<int> columnIdsTo)
+        {
+            if (reportFrom.FileName.ToLower().Contains(".csv"))
+            {
+                
+            }
+            else if (reportFrom.FileName.ToLower().Contains(".xls"))
+            {
+                
+            }
+            else if (reportFrom.FileName.ToLower().Contains(".xlsx"))
+            {
+                
+            }
+
+        }
+
         public static void SaveTemplateFile(string filePath)
         {
             //check if template folder exist

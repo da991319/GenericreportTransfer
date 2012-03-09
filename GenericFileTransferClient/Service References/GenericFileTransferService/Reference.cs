@@ -686,20 +686,20 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Report>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Transfer))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityKey))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.EntityKeyMember>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.StructuralObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfReportJhU6VumU))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReference))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.RelatedEnd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityReferenceOfColumnJhU6VumU))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityKey))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.EntityKeyMember>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Report>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Column>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Transfer))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -852,6 +852,9 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/GetTransferMapping", ReplyAction="http://tempuri.org/GenericFileTransferService/GetTransferMappingResponse")]
         System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> GetTransferMapping(int reportFromId, int reportToId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/UpsertTransfer", ReplyAction="http://tempuri.org/GenericFileTransferService/UpsertTransferResponse")]
+        void UpsertTransfer(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> transfers);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -907,6 +910,10 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         public System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> GetTransferMapping(int reportFromId, int reportToId) {
             return base.Channel.GetTransferMapping(reportFromId, reportToId);
+        }
+        
+        public void UpsertTransfer(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> transfers) {
+            base.Channel.UpsertTransfer(transfers);
         }
     }
 }

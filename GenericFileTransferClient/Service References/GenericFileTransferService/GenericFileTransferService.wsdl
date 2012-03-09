@@ -2,11 +2,11 @@
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GenericFileTransferService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
-      <xsd:import schemaLocation="http://localhost:49931/GenericFileTransferService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:50508/GenericFileTransferService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50508/GenericFileTransferService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50508/GenericFileTransferService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService" />
+      <xsd:import schemaLocation="http://localhost:50508/GenericFileTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:50508/GenericFileTransferService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="GenericFileTransferService_GetAllReports_InputMessage">
@@ -51,6 +51,12 @@
   <wsdl:message name="GenericFileTransferService_GetTransferMapping_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTransferMappingResponse" />
   </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertTransfer" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_UpsertTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpsertTransferResponse" />
+  </wsdl:message>
   <wsdl:portType name="GenericFileTransferService">
     <wsdl:operation name="GetAllReports">
       <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetAllReports" message="tns:GenericFileTransferService_GetAllReports_InputMessage" />
@@ -79,6 +85,10 @@
     <wsdl:operation name="GetTransferMapping">
       <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetTransferMapping" message="tns:GenericFileTransferService_GetTransferMapping_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/GetTransferMappingResponse" message="tns:GenericFileTransferService_GetTransferMapping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsertTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertTransfer" message="tns:GenericFileTransferService_UpsertTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertTransferResponse" message="tns:GenericFileTransferService_UpsertTransfer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_GenericFileTransferService" type="tns:GenericFileTransferService">
@@ -146,10 +156,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpsertTransfer">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/UpsertTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GenericFileTransferService">
     <wsdl:port name="BasicHttpBinding_GenericFileTransferService" binding="tns:BasicHttpBinding_GenericFileTransferService">
-      <soap:address location="http://localhost:49931/GenericFileTransferService.svc" />
+      <soap:address location="http://localhost:50508/GenericFileTransferService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

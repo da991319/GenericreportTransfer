@@ -50,5 +50,11 @@ namespace GenericFile.DataService
             return Business.GetTransferMappping(reportFromId,reportToId);
         }
 
+        [OperationContract]
+        public void UpsertTransfer(List<Transfer> transfers)
+        {
+            Business.UpsertTransfer(transfers);
+        }
+
     } 
 }

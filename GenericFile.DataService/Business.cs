@@ -39,5 +39,10 @@ namespace GenericFile.DataService
         {
             return CRUD.GetTransferMapping(reportFromId, reportToId);
         }
+
+        public static void UpsertTransfer(List<Transfer> transfers)
+        {
+            CRUD.UpsertTransfer(transfers);
+        }
     }
 }
