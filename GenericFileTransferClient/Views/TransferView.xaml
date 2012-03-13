@@ -12,6 +12,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -28,7 +29,7 @@
                       CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn Header="Header of Source" DisplayMemberPath="Header" SelectedValuePath="Id" 
-                                            SelectedValueBinding="{Binding Path=ColumnId}" Width="Auto">
+                                            SelectedValueBinding="{Binding Path=ColumnId}" Width="Auto" IsReadOnly="True">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
                                 <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedReportFrom.Columns}"/>
@@ -64,9 +65,14 @@
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
+                <TextBlock Text="Path of the template:"/>
+                <TextBox Width="150" Text="{Binding FilePath}"/>
+                <Button Content="Browse" Command="{Binding BrowseCommand}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2">
-            <Button Content="Save"  Command="{Binding SaveMappings}"/>
-            <Button Content="Execute" Command="{Binding ExecuteTransfer}"/>
+                <Button Content="Save"  Command="{Binding SaveMappings}"/>
+                <Button Content="Execute" Command="{Binding ExecuteTransfer}"/>
             </StackPanel>
         </Grid>
         
