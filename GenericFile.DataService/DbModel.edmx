@@ -8,6 +8,7 @@
         <EntityContainer Name="DbModelStoreContainer">
           <EntitySet Name="Columns" EntityType="DbModel.Store.Columns" store:Type="Tables" />
           <EntitySet Name="Reports" EntityType="DbModel.Store.Reports" store:Type="Tables" />
+          <EntitySet Name="TempTransfers" EntityType="DbModel.Store.TempTransfers" store:Type="Tables" />
           <EntitySet Name="Transfers" EntityType="DbModel.Store.Transfers" store:Type="Tables" />
           <AssociationSet Name="Fk_Transfer_Column" Association="DbModel.Store.Fk_Transfer_Column">
             <End Role="Columns" EntitySet="Columns" />
@@ -52,6 +53,15 @@
           <Property Name="FileName" Type="nvarchar" MaxLength="100" />
           <Property Name="SheetName" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="TempTransfers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RowNumber" Type="bigint" Nullable="false" />
+          <Property Name="ColIndex" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="Transfers">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +71,7 @@
           <Property Name="columnToId" Type="int" Nullable="false" />
           <Property Name="ReportFromId" Type="int" Nullable="false" />
           <Property Name="ReportToId" Type="int" Nullable="false" />
+          <Property Name="ColIndex" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="Fk_Transfer_Column">
           <End Role="Columns" Type="DbModel.Store.Columns" Multiplicity="1" />
@@ -152,6 +163,7 @@
             <End Role="Report" EntitySet="Reports" />
             <End Role="Transfer" EntitySet="Transfers" />
           </AssociationSet>
+          <EntitySet Name="TempTransfers" EntityType="DbModel.TempTransfer" />
         </EntityContainer>
         <EntityType Name="Column">
           <Key>
@@ -209,6 +221,7 @@
           <Property Type="Int32" Name="ReportToId" Nullable="false" />
           <NavigationProperty Name="Report" Relationship="DbModel.FK_Transfer_Report" FromRole="Transfer" ToRole="Report" />
           <NavigationProperty Name="Report1" Relationship="DbModel.FK_Transfer_Report2" FromRole="Transfer" ToRole="Report" />
+          <Property Type="Int32" Name="ColIndex" Nullable="false" />
         </EntityType>
         <Association Name="Fk_Transfer_Column">
           <End Type="DbModel.Column" Role="Column" Multiplicity="1" />
@@ -258,6 +271,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TempTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="RowNumber" Nullable="false" />
+          <Property Type="Int32" Name="ColIndex" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -283,10 +305,21 @@
           <EntitySetMapping Name="Transfers">
             <EntityTypeMapping TypeName="DbModel.Transfer">
               <MappingFragment StoreEntitySet="Transfers">
+                <ScalarProperty Name="ColIndex" ColumnName="ColIndex" />
                 <ScalarProperty Name="ReportToId" ColumnName="ReportToId" />
                 <ScalarProperty Name="ReportFromId" ColumnName="ReportFromId" />
                 <ScalarProperty Name="columnToId" ColumnName="columnToId" />
                 <ScalarProperty Name="ColumnFromId" ColumnName="ColumnFromId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempTransfers">
+            <EntityTypeMapping TypeName="DbModel.TempTransfer">
+              <MappingFragment StoreEntitySet="TempTransfers">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ColIndex" ColumnName="ColIndex" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -335,6 +368,7 @@
           <ConnectorPoint PointX="2.25" PointY="3.6040657552083335" />
           <ConnectorPoint PointX="5.25" PointY="3.6040657552083335" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="DbModel.TempTransfer" Width="1.5" PointX="3.5" PointY="5.25" Height="1.7879850260416657" />
       </Diagram>
     </Diagrams>
   </Designer>

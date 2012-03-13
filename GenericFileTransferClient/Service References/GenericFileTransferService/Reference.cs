@@ -203,6 +203,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.EntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Transfer))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.TempTransfer))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report))]
     public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -235,6 +236,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Transfer))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.TempTransfer))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Report))]
     public partial class EntityObject : GenericFileTransferClient.GenericFileTransferService.StructuralObject {
         
@@ -397,6 +399,9 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     public partial class Transfer : GenericFileTransferClient.GenericFileTransferService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ColIndexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GenericFileTransferClient.GenericFileTransferService.Column ColumnField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -434,6 +439,19 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int columnToIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ColIndex {
+            get {
+                return this.ColIndexField;
+            }
+            set {
+                if ((this.ColIndexField.Equals(value) != true)) {
+                    this.ColIndexField = value;
+                    this.RaisePropertyChanged("ColIndex");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public GenericFileTransferClient.GenericFileTransferService.Column Column {
@@ -607,6 +625,77 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TempTransfer", Namespace="http://schemas.datacontract.org/2004/07/GenericFile.DataService", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class TempTransfer : GenericFileTransferClient.GenericFileTransferService.EntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ColIndexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long RowNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValueField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ColIndex {
+            get {
+                return this.ColIndexField;
+            }
+            set {
+                if ((this.ColIndexField.Equals(value) != true)) {
+                    this.ColIndexField = value;
+                    this.RaisePropertyChanged("ColIndex");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long RowNumber {
+            get {
+                return this.RowNumberField;
+            }
+            set {
+                if ((this.RowNumberField.Equals(value) != true)) {
+                    this.RowNumberField = value;
+                    this.RaisePropertyChanged("RowNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityKey", Namespace="http://schemas.datacontract.org/2004/07/System.Data", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class EntityKey : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -700,6 +789,7 @@ namespace GenericFileTransferClient.GenericFileTransferService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Column))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.Transfer))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GenericFileTransferClient.GenericFileTransferService.TempTransfer))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -855,6 +945,12 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/UpsertTransfer", ReplyAction="http://tempuri.org/GenericFileTransferService/UpsertTransferResponse")]
         void UpsertTransfer(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> transfers);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/InsertTempTransfer", ReplyAction="http://tempuri.org/GenericFileTransferService/InsertTempTransferResponse")]
+        void InsertTempTransfer(GenericFileTransferClient.GenericFileTransferService.TempTransfer tempTransfer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GenericFileTransferService/GetTempTransferValue", ReplyAction="http://tempuri.org/GenericFileTransferService/GetTempTransferValueResponse")]
+        string GetTempTransferValue(long rowNumber, int colIndex);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -914,6 +1010,14 @@ namespace GenericFileTransferClient.GenericFileTransferService {
         
         public void UpsertTransfer(System.Collections.Generic.List<GenericFileTransferClient.GenericFileTransferService.Transfer> transfers) {
             base.Channel.UpsertTransfer(transfers);
+        }
+        
+        public void InsertTempTransfer(GenericFileTransferClient.GenericFileTransferService.TempTransfer tempTransfer) {
+            base.Channel.InsertTempTransfer(tempTransfer);
+        }
+        
+        public string GetTempTransferValue(long rowNumber, int colIndex) {
+            return base.Channel.GetTempTransferValue(rowNumber, colIndex);
         }
     }
 }

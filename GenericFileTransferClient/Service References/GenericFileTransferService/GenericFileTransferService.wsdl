@@ -57,6 +57,18 @@
   <wsdl:message name="GenericFileTransferService_UpsertTransfer_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpsertTransferResponse" />
   </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_InsertTempTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTempTransfer" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_InsertTempTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTempTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_GetTempTransferValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTempTransferValue" />
+  </wsdl:message>
+  <wsdl:message name="GenericFileTransferService_GetTempTransferValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTempTransferValueResponse" />
+  </wsdl:message>
   <wsdl:portType name="GenericFileTransferService">
     <wsdl:operation name="GetAllReports">
       <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetAllReports" message="tns:GenericFileTransferService_GetAllReports_InputMessage" />
@@ -89,6 +101,14 @@
     <wsdl:operation name="UpsertTransfer">
       <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertTransfer" message="tns:GenericFileTransferService_UpsertTransfer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/UpsertTransferResponse" message="tns:GenericFileTransferService_UpsertTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTempTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/InsertTempTransfer" message="tns:GenericFileTransferService_InsertTempTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/InsertTempTransferResponse" message="tns:GenericFileTransferService_InsertTempTransfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTempTransferValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/GenericFileTransferService/GetTempTransferValue" message="tns:GenericFileTransferService_GetTempTransferValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GenericFileTransferService/GetTempTransferValueResponse" message="tns:GenericFileTransferService_GetTempTransferValue_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_GenericFileTransferService" type="tns:GenericFileTransferService">
@@ -158,6 +178,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpsertTransfer">
       <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/UpsertTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTempTransfer">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/InsertTempTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTempTransferValue">
+      <soap:operation soapAction="http://tempuri.org/GenericFileTransferService/GetTempTransferValue" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

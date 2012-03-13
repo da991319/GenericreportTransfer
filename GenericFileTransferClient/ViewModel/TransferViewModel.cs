@@ -107,6 +107,23 @@ namespace GenericFileTransferClient.ViewModel
             set { _listMappingTo = value; RaisePropertyChanged("ListMappingTo"); }
         }
 
+        private string _filePath;
+
+        public string FilePath
+        {
+            get { return _filePath; }
+            set { _filePath = value; RaisePropertyChanged("FilePath"); }
+        }
+
+        private int[] _columnNumbers;
+
+        public int[] ColumnNumbers
+        {
+            get { return _columnNumbers; }
+            set { _columnNumbers = value; }
+        }
+        
+
         private RelayCommand _saveMappings;
 
         public RelayCommand  SaveMappings
@@ -134,10 +151,25 @@ namespace GenericFileTransferClient.ViewModel
                 return _executeTransfer;
             }
         }
+
+        private RelayCommand _browseCommand;
+
+        public RelayCommand BrowseCommand
+        {
+            get
+            {
+                if (_browseCommand == null)
+                {
+                    _browseCommand = new RelayCommand(ExecuteBrowseCommand, CanExecuteBrowseCommand);
+                }
+                return _browseCommand;
+            }
+        }
         
         private void ExecuteTransferCommand()
         {
-            throw new System.NotImplementedException();
+            Utils.ExecuteTransfer(FilePath, SelectedReportFrom, SelectedReportTo, ListMappingFrom.Select(m => m.ColumnId).ToList(), 
+                ListMappingTo.Select(m => m.ColumnId).ToList());
         }
 
         private bool CanExecuteTransferCommand()
@@ -147,10 +179,11 @@ namespace GenericFileTransferClient.ViewModel
 
         private void ExecuteSaveMappingsCommand()
         {
-            List<Transfer> listTransfer = new List<Transfer>();
             foreach (TransferModel tm in ListMappingTo)
             {
-                _transferViewModelList.Where(t => t.columnToId.Equals(tm.ColumnId)).FirstOrDefault().ColumnFromId = ListMappingFrom[ListMappingTo.IndexOf(tm)].ColumnId;
+                _transferViewModelList.Where(t => t.columnToId.Equals(tm.ColumnId)).FirstOrDefault()
+                    .ColumnFromId = ListMappingFrom.Where(m => m.Position.Equals(tm.Position)).FirstOrDefault().ColumnId;
+                _transferViewModelList.Where(t => t.columnToId.Equals(tm.ColumnId)).FirstOrDefault().ColIndex = tm.Position;
                
             }
 
@@ -162,6 +195,28 @@ namespace GenericFileTransferClient.ViewModel
             return true;
         }
 
+        private void ExecuteBrowseCommand()
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".csv|*.xls|*.xlsx"; // Default file extension
+            dlg.Filter = "Text documents (.csv)|*.csv|Excel documents (*.xls, *.xlsx)|*.xls;*.xlsx"; // Filter files by extension
+
+            // Show open file dialog box
+            System.Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                FilePath = dlg.FileName;
+            }
+        }
+
+        private bool CanExecuteBrowseCommand()
+        {
+            return true;
+        }
 
         /// <summary>
         /// Initializes a new instance of the TransferViewModel class.
@@ -189,12 +244,15 @@ namespace GenericFileTransferClient.ViewModel
 
                 if (_transferViewModelList.Count != 0)
                 {
-                    ListMappingFrom = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel{
+                    ListMappingFrom = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel
+                    {
+                        Position = t.ColIndex,
                         ColumnId = t.ColumnFromId
                     }).ToList());
 
                     ListMappingTo = new ObservableCollection<TransferModel>(_transferViewModelList.Select(t => new TransferModel
                     {
+                        Position = t.ColIndex,
                         ColumnId = t.columnToId
                     }).ToList());
                 }
@@ -204,15 +262,20 @@ namespace GenericFileTransferClient.ViewModel
                     ListMappingFrom = new ObservableCollection<TransferModel>(SelectedReportFrom.Columns.Where(c => !c.Position.Equals(-1))
                         .Select(c => new TransferModel
                     {
+                        Position = c.Position,
                         ColumnId = c.Id
                     }).ToList());
 
-                    ListMappingTo = new ObservableCollection<TransferModel>(SelectedReportTo.Columns.Where(c => !c.Position.Equals(-1))
+                    ListMappingTo = new ObservableCollection<TransferModel>(SelectedReportTo.Columns
                         .Select(c => new TransferModel
                     {
+                        Position = c.Position,
                         ColumnId = c.Id
                     }).ToList());
                 }
+
+                //set the array of column number of the target file
+                ColumnNumbers = ListMappingTo.Select(tm => tm.Position).ToArray();
             }
         }
 

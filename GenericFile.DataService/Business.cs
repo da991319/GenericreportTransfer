@@ -44,5 +44,15 @@ namespace GenericFile.DataService
         {
             CRUD.UpsertTransfer(transfers);
         }
+
+        public static void InsertTempTransfer(TempTransfer tempTransfer)
+        {
+            CRUD.InsertTrempTransfer(tempTransfer);
+        }
+
+        public static string GetTempTransferValue(long rowNumber, int colIndex)
+        {
+            return CRUD.GetTempTransferValue(rowNumber, colIndex);
+        }
     }
 }

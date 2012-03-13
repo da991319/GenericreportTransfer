@@ -118,5 +118,23 @@ namespace GenericFile.DataService
                 return db.SaveChanges();
             }
         }
+
+        public static int InsertTrempTransfer(TempTransfer tempTransfer)
+        {
+            using (DbEntities db = new DbEntities())
+            {
+                db.TempTransfers.AddObject(tempTransfer);
+                return db.SaveChanges();
+            }
+        }
+
+        public static string GetTempTransferValue(long rowNumber, int colIndex)
+        {
+            using (DbEntities db = new DbEntities())
+            {
+                return db.TempTransfers.Where(t => t.ColIndex.Equals(colIndex) && t.RowNumber.Equals(rowNumber))
+                    .FirstOrDefault().Value;
+            }
+        }
     }
 }

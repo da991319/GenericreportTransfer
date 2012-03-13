@@ -60,6 +60,7 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q3:EntityObject">
         <xs:sequence>
+          <xs:element minOccurs="0" name="ColIndex" type="xs:int" />
           <xs:element minOccurs="0" name="Column" nillable="true" type="tns:Column" />
           <xs:element minOccurs="0" name="Column1" nillable="true" type="tns:Column" />
           <xs:element minOccurs="0" name="Column1Reference" nillable="true" type="q3:EntityReferenceOfColumnJhU6VumU" />
@@ -78,4 +79,17 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Transfer" nillable="true" type="tns:Transfer" />
+  <xs:complexType name="TempTransfer">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q4:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ColIndex" type="xs:int" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="RowNumber" type="xs:long" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TempTransfer" nillable="true" type="tns:TempTransfer" />
 </xs:schema>

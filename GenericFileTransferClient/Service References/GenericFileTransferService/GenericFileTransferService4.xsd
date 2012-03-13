@@ -102,4 +102,31 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="InsertTempTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="tempTransfer" nillable="true" type="q9:TempTransfer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertTempTransferResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTempTransferValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="rowNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="colIndex" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTempTransferValueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTempTransferValueResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

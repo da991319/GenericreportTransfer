@@ -16,6 +16,14 @@ namespace GenericFileTransferClient.Model
             get { return _columnId; }
             set { _columnId = value; OnPropertyChanged("ColumnId"); }
         }
+
+        private int _position;
+
+        public int Position
+        {
+            get { return _position; }
+            set { _position = value; OnPropertyChanged("Position"); }
+        }
         
         public TransferModel()
         {

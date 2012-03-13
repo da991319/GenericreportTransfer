@@ -56,5 +56,16 @@ namespace GenericFile.DataService
             Business.UpsertTransfer(transfers);
         }
 
+        [OperationContract]
+        public void InsertTempTransfer(TempTransfer tempTransfer)
+        {
+            Business.InsertTempTransfer(tempTransfer);
+        }
+
+        [OperationContract]
+        public string GetTempTransferValue(long rowNumber, int colIndex)
+        {
+            return Business.GetTempTransferValue(rowNumber, colIndex);
+        }
     } 
 }
