@@ -119,11 +119,11 @@ namespace GenericFile.DataService
             }
         }
 
-        public static int InsertTrempTransfer(TempTransfer tempTransfer)
+        public static int InsertTrempTransfer(List<TempTransfer> tempTransfers)
         {
             using (DbEntities db = new DbEntities())
             {
-                db.TempTransfers.AddObject(tempTransfer);
+                tempTransfers.ForEach(t => db.AddObject("TempTransfer",t));
                 return db.SaveChanges();
             }
         }

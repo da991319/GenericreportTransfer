@@ -57,9 +57,9 @@ namespace GenericFile.DataService
         }
 
         [OperationContract]
-        public void InsertTempTransfer(TempTransfer tempTransfer)
+        public void InsertTempTransfer(List<TempTransfer> tempTransfers)
         {
-            Business.InsertTempTransfer(tempTransfer);
+            Business.InsertTempTransfer(tempTransfers);
         }
 
         [OperationContract]

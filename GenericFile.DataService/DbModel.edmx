@@ -71,7 +71,6 @@
           <Property Name="columnToId" Type="int" Nullable="false" />
           <Property Name="ReportFromId" Type="int" Nullable="false" />
           <Property Name="ReportToId" Type="int" Nullable="false" />
-          <Property Name="ColIndex" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="Fk_Transfer_Column">
           <End Role="Columns" Type="DbModel.Store.Columns" Multiplicity="1" />
@@ -221,7 +220,6 @@
           <Property Type="Int32" Name="ReportToId" Nullable="false" />
           <NavigationProperty Name="Report" Relationship="DbModel.FK_Transfer_Report" FromRole="Transfer" ToRole="Report" />
           <NavigationProperty Name="Report1" Relationship="DbModel.FK_Transfer_Report2" FromRole="Transfer" ToRole="Report" />
-          <Property Type="Int32" Name="ColIndex" Nullable="false" />
         </EntityType>
         <Association Name="Fk_Transfer_Column">
           <End Type="DbModel.Column" Role="Column" Multiplicity="1" />
@@ -305,7 +303,6 @@
           <EntitySetMapping Name="Transfers">
             <EntityTypeMapping TypeName="DbModel.Transfer">
               <MappingFragment StoreEntitySet="Transfers">
-                <ScalarProperty Name="ColIndex" ColumnName="ColIndex" />
                 <ScalarProperty Name="ReportToId" ColumnName="ReportToId" />
                 <ScalarProperty Name="ReportFromId" ColumnName="ReportFromId" />
                 <ScalarProperty Name="columnToId" ColumnName="columnToId" />
@@ -351,22 +348,22 @@
           <ConnectorPoint PointX="2.25" PointY="2.3074446614583337" />
           <ConnectorPoint PointX="3" PointY="2.3074446614583337" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="DbModel.Transfer" Width="1.5" PointX="5.25" PointY="1.375" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="DbModel.Transfer" Width="1.5" PointX="5.25" PointY="1.375" Height="2.7494921874999996" />
         <AssociationConnector Association="DbModel.Fk_Transfer_Column" >
-          <ConnectorPoint PointX="4.5" PointY="2.780926920572917" />
-          <ConnectorPoint PointX="5.25" PointY="2.780926920572917" />
+          <ConnectorPoint PointX="4.5" PointY="2.8237387593587244" />
+          <ConnectorPoint PointX="5.25" PointY="2.8237387593587244" />
         </AssociationConnector>
         <AssociationConnector Association="DbModel.FK_Transfer_Column2" >
-          <ConnectorPoint PointX="4.5" PointY="2.0154634602864583" />
-          <ConnectorPoint PointX="5.25" PointY="2.0154634602864583" />
+          <ConnectorPoint PointX="4.5" PointY="2.036869379679362" />
+          <ConnectorPoint PointX="5.25" PointY="2.036869379679362" />
         </AssociationConnector>
         <AssociationConnector Association="DbModel.FK_Transfer_Report" >
-          <ConnectorPoint PointX="2.25" PointY="3.7807421875" />
-          <ConnectorPoint PointX="5.25" PointY="3.7807421875" />
+          <ConnectorPoint PointX="2.25" PointY="3.8690804036458331" />
+          <ConnectorPoint PointX="5.25" PointY="3.8690804036458331" />
         </AssociationConnector>
         <AssociationConnector Association="DbModel.FK_Transfer_Report2" >
-          <ConnectorPoint PointX="2.25" PointY="3.6040657552083335" />
-          <ConnectorPoint PointX="5.25" PointY="3.6040657552083335" />
+          <ConnectorPoint PointX="2.25" PointY="3.6482348632812505" />
+          <ConnectorPoint PointX="5.25" PointY="3.6482348632812505" />
         </AssociationConnector>
         <EntityTypeShape EntityType="DbModel.TempTransfer" Width="1.5" PointX="3.5" PointY="5.25" Height="1.7879850260416657" />
       </Diagram>

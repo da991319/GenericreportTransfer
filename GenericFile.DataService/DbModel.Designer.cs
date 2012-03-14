@@ -850,8 +850,7 @@ namespace GenericFile.DataService
         /// <param name="columnToId">Initial value of the columnToId property.</param>
         /// <param name="reportFromId">Initial value of the ReportFromId property.</param>
         /// <param name="reportToId">Initial value of the ReportToId property.</param>
-        /// <param name="colIndex">Initial value of the ColIndex property.</param>
-        public static Transfer CreateTransfer(global::System.Int32 id, global::System.Int32 columnFromId, global::System.Int32 columnToId, global::System.Int32 reportFromId, global::System.Int32 reportToId, global::System.Int32 colIndex)
+        public static Transfer CreateTransfer(global::System.Int32 id, global::System.Int32 columnFromId, global::System.Int32 columnToId, global::System.Int32 reportFromId, global::System.Int32 reportToId)
         {
             Transfer transfer = new Transfer();
             transfer.Id = id;
@@ -859,7 +858,6 @@ namespace GenericFile.DataService
             transfer.columnToId = columnToId;
             transfer.ReportFromId = reportFromId;
             transfer.ReportToId = reportToId;
-            transfer.ColIndex = colIndex;
             return transfer;
         }
 
@@ -988,30 +986,6 @@ namespace GenericFile.DataService
         private global::System.Int32 _ReportToId;
         partial void OnReportToIdChanging(global::System.Int32 value);
         partial void OnReportToIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ColIndex
-        {
-            get
-            {
-                return _ColIndex;
-            }
-            set
-            {
-                OnColIndexChanging(value);
-                ReportPropertyChanging("ColIndex");
-                _ColIndex = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ColIndex");
-                OnColIndexChanged();
-            }
-        }
-        private global::System.Int32 _ColIndex;
-        partial void OnColIndexChanging(global::System.Int32 value);
-        partial void OnColIndexChanged();
 
         #endregion
     

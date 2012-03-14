@@ -105,7 +105,7 @@
   <xs:element name="InsertTempTransfer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="tempTransfer" nillable="true" type="q9:TempTransfer" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GenericFile.DataService" minOccurs="0" name="tempTransfers" nillable="true" type="q9:ArrayOfTempTransfer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

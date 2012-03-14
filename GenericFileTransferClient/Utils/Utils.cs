@@ -7,6 +7,7 @@ using Microsoft.VisualBasic.FileIO;
 using NPOI.HSSF.UserModel;
 using OfficeOpenXml;
 using System.Linq;
+using GenericFileTransferClient.Model;
 
 namespace GenericFileTransferClient
 {
@@ -107,15 +108,18 @@ namespace GenericFileTransferClient
             return tempList;
         }
 
-        public static void ExecuteTransfer(string filePath, Report reportFrom, Report reportTo, List<int> columnIdsFrom, List<int> columnIdsTo)
+        public static void ExecuteTransfer(string filePath, Report reportFrom, Report reportTo, List<TransferModel> columnsFrom)
         {
+            List<TempTransfer> listCells = new List<TempTransfer>();
+
             if (reportFrom.FileName.ToLower().Contains(".csv"))
             {
                 
             }
             else if (reportFrom.FileName.ToLower().Contains(".xls"))
             {
-                ReadXLS(filePath, reportFrom, columnIdsFrom);
+                //get cells
+                listCells = ReadXLS(filePath, reportFrom, columnsFrom);
             }
             else if (reportFrom.FileName.ToLower().Contains(".xlsx"))
             {
@@ -150,12 +154,18 @@ namespace GenericFileTransferClient
             }
         }
 
-        private static void ReadXLS(string filePath, Report reportFrom, List<int> columnIdsFrom)
+        private static List<TempTransfer> ReadXLS(string filePath, Report reportFrom, List<TransferModel> columnsFrom)
         {
             int row = reportFrom.ResultRow;
             HSSFRow currentRow;
-            int colIndex = -1;
-            
+            int colToIndex = -1;
+            int currentColId = -1;
+            List<TempTransfer> tempList = new List<TempTransfer>();
+
+            //get the col index of columns being mapped 
+            List<int> columnsFromIndex = reportFrom.Columns.Where(c => columnsFrom.Where(cm => !cm.Position.Equals(-1))
+                .Select(cm => cm.ColumnId).Contains(c.Id)).Select(c => c.Position - 1).ToList();
+
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
                 //getting complete workbook
@@ -175,15 +185,15 @@ namespace GenericFileTransferClient
                         //be sure we are dealing with a results row
                         if (currentRow.RowNum >= reportFrom.ResultRow - 1)
                         {
-                            foreach (HSSFCell currentCell in currentRow.Cells)
+                            foreach (HSSFCell currentCell in currentRow.Cells.Where(c => columnsFromIndex.Contains(c.ColumnIndex)))
                             {
                                 //NPOI is 0 based, value are stored in starting from 1
-                                colIndex= columnIdsFrom.IndexOf(reportFrom.Columns.Where(c => c.Position.Equals(currentCell.ColumnIndex + 1))
-                                    .FirstOrDefault().Id);
+                                currentColId = reportFrom.Columns.Where(c => c.Position.Equals(currentCell.ColumnIndex + 1)).FirstOrDefault().Id;
+                                colToIndex = columnsFrom.Where(c => c.ColumnId.Equals(currentColId)).FirstOrDefault().Position;
 
-                                if (colIndex != -1)
+                                if (colToIndex != -1)
                                 {
-                                    serviceClient.InsertTempTransfer(new TempTransfer
+                                    tempList.Add(new TempTransfer
                                     {
                                         ColIndex = currentCell.ColumnIndex + 1,
                                         RowNumber = currentCell.RowIndex + 1,
@@ -195,6 +205,8 @@ namespace GenericFileTransferClient
                     }
                 }
 
+                //serviceClient.InsertTempTransfer(tempList);
+                return tempList;
             }
         }
     }
