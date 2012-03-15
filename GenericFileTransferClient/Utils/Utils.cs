@@ -120,6 +120,10 @@ namespace GenericFileTransferClient
             {
                 //get cells
                 listCells = ReadXLS(filePath, reportFrom, columnsFrom);
+                WriteXLS(Path.Combine(directoryPath, reportTo.FileName), listCells, reportTo);
+
+                listCells.Clear();
+                listCells.TrimExcess();
             }
             else if (reportFrom.FileName.ToLower().Contains(".xlsx"))
             {
@@ -195,7 +199,7 @@ namespace GenericFileTransferClient
                                 {
                                     tempList.Add(new TempTransfer
                                     {
-                                        ColIndex = currentCell.ColumnIndex + 1,
+                                        ColIndex = colToIndex ,
                                         RowNumber = currentCell.RowIndex + 1,
                                         Value = currentCell.StringCellValue
                                     });
@@ -206,8 +210,57 @@ namespace GenericFileTransferClient
                 }
 
                 //serviceClient.InsertTempTransfer(tempList);
+                tempList.TrimExcess();
                 return tempList;
             }
         }
+
+        private static void WriteXLS(string pathTemplate, List<TempTransfer> listTransfers, Report reportTo)
+        {
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),"Targetfile" + DateTime.Now.ToString("yyy_MM_dd_hh_mm") + ".xls");
+            int row = reportTo.ResultRow;
+            HSSFRow currentRow;
+            HSSFCell currentCell;
+
+            using (FileStream fs = new FileStream(pathTemplate, FileMode.Open, FileAccess.Read))
+            {
+                //getting complete workbook
+                HSSFWorkbook templateWorkbook = new HSSFWorkbook(fs, true);
+
+                // Getting the worksheet
+                HSSFSheet sheet = templateWorkbook.GetSheet(reportTo.SheetName) as HSSFSheet;
+
+                foreach (TempTransfer item in listTransfers.OrderBy(t => t.RowNumber).ThenBy(t => t.ColIndex))
+                {
+                    currentRow = sheet.GetRow(Convert.ToInt32(reportTo.ResultRow - 1 + item.RowNumber - 1)) as HSSFRow;
+
+                    //cehck if row exists
+                    if (currentRow == null)
+                    {
+                        currentRow = sheet.CreateRow(Convert.ToInt32(reportTo.ResultRow - 1 + item.RowNumber - 1)) as HSSFRow;
+                    }
+
+                    currentCell = currentRow.GetCell(item.ColIndex - 1) as HSSFCell;
+
+                    if (currentCell == null)
+                    {
+                        currentCell = currentRow.CreateCell(item.ColIndex - 1) as HSSFCell;
+                    }
+
+                    currentCell.SetCellValue(item.Value);
+                }
+
+                using (FileStream writer = new FileStream(path, FileMode.Create, FileAccess.Write))
+                {
+                    templateWorkbook.Write(writer);
+                    writer.Close();
+                }
+
+                sheet.Dispose();
+                templateWorkbook.Dispose();
+                fs.Close();
+            }
+        }
+
     }
 }
