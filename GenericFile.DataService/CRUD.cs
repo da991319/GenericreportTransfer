@@ -54,6 +54,11 @@ namespace GenericFile.DataService
                 db.Attach(report);
                 db.Reports.DeleteObject(report);
                 db.ObjectStateManager.ChangeObjectState(report, System.Data.EntityState.Deleted);
+                
+                //remove transfer with this report
+                var transfers = db.Transfers.Where(t => t.ReportFromId.Equals(report.Id) || t.ReportToId.Equals(report.Id)).ToList();
+                transfers.ForEach(t => db.DeleteObject(t));
+
                 return db.SaveChanges();
             }
         }

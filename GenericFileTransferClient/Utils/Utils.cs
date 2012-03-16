@@ -8,6 +8,7 @@ using NPOI.HSSF.UserModel;
 using OfficeOpenXml;
 using System.Linq;
 using GenericFileTransferClient.Model;
+using System.Text.RegularExpressions;
 
 namespace GenericFileTransferClient
 {
@@ -234,7 +235,7 @@ namespace GenericFileTransferClient
                 {
                     currentRow = sheet.GetRow(Convert.ToInt32(reportTo.ResultRow - 1 + item.RowNumber - 1)) as HSSFRow;
 
-                    //cehck if row exists
+                    //check if row exists
                     if (currentRow == null)
                     {
                         currentRow = sheet.CreateRow(Convert.ToInt32(reportTo.ResultRow - 1 + item.RowNumber - 1)) as HSSFRow;
@@ -247,18 +248,34 @@ namespace GenericFileTransferClient
                         currentCell = currentRow.CreateCell(item.ColIndex - 1) as HSSFCell;
                     }
 
-                    currentCell.SetCellValue(item.Value);
+                    //hardcoded for the LIMS Template
+                    //need to make it more generic
+                    if (item.ColIndex.Equals(3) && !Regex.IsMatch(item.Value.ToUpper(), @"\d{2,3}/\d{2}-\d{2}-\d{3}-\d{2}W\d/\d{2}"))
+                    {
+                        //Not a UWI
+                        currentCell.SetCellValue(item.Value);
+                    }
+                    else
+                    {
+                        Dictionary<string, string> uwi = UWI.ParseUWIAlberta(item.Value);
+
+                        currentCell.SetCellValue(uwi["wellIdent"]);
+                        currentRow.CreateCell(3).SetCellValue(uwi["wellLegalSub"]);
+                        currentRow.CreateCell(3).SetCellValue(uwi["wellSection"]);
+                        currentRow.CreateCell(3).SetCellValue(uwi["wellTownShip"]);
+                        currentRow.CreateCell(3).SetCellValue(uwi["wellRange"]);
+                        currentRow.CreateCell(3).SetCellValue(uwi["wellMeridian"]);
+                    }
+                    
                 }
 
                 using (FileStream writer = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     templateWorkbook.Write(writer);
-                    writer.Close();
                 }
 
                 sheet.Dispose();
                 templateWorkbook.Dispose();
-                fs.Close();
             }
         }
 
