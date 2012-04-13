@@ -32,6 +32,7 @@ namespace GenericFileTransferClient.ViewModel
                 if (Mode.Equals(ViewModel.Mode.Edit) && value != null)
                 {
                     LoadColumns();
+                    FilePath = CurrentReport.FileName;
                 }
                 
             }

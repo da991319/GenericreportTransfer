@@ -115,13 +115,13 @@ namespace GenericFileTransferClient.ViewModel
             set { _filePath = value; RaisePropertyChanged("FilePath"); }
         }
 
-        private int[] _columnNumbers;
+        //private int[] _columnNumbers;
 
-        public int[] ColumnNumbers
-        {
-            get { return _columnNumbers; }
-            set { _columnNumbers = value; }
-        }
+        //public int[] ColumnNumbers
+        //{
+        //    get { return _columnNumbers; }
+        //    set { _columnNumbers = value; }
+        //}
         
 
         private RelayCommand _saveMappings;
@@ -276,11 +276,12 @@ namespace GenericFileTransferClient.ViewModel
                 }
                 else
                 {
+                    int defaultPosition = SelectedReportFrom.Columns.Where(cTo => cTo.Position.Equals(-1)).FirstOrDefault().Position;
                     //we don't want the empty row to be displayed as a row
                     ListMappingFrom = new ObservableCollection<TransferModel>(SelectedReportFrom.Columns.Where(c => !c.Position.Equals(-1))
                         .Select(c => new TransferModel
                     {
-                        Position = c.Position,
+                        Position = defaultPosition,
                         ColumnId = c.Id
                     }).ToList());
                 }
@@ -294,7 +295,7 @@ namespace GenericFileTransferClient.ViewModel
                 
 
                 //set the array of column number of the target file
-                ColumnNumbers = ListMappingTo.Select(tm => tm.Position).ToArray();
+                //ColumnNumbers = ListMappingTo.Select(tm => tm.Position).ToArray();
             }
         }
 

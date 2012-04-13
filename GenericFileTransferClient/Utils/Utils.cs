@@ -123,8 +123,7 @@ namespace GenericFileTransferClient
                 listCells = ReadXLS(filePath, reportFrom, columnsFrom);
                 WriteXLS(Path.Combine(directoryPath, reportTo.FileName), listCells, reportTo);
 
-                listCells.Clear();
-                listCells.TrimExcess();
+                listCells = null;                
             }
             else if (reportFrom.FileName.ToLower().Contains(".xlsx"))
             {
@@ -250,21 +249,24 @@ namespace GenericFileTransferClient
 
                     //hardcoded for the LIMS Template
                     //need to make it more generic
-                    if (item.ColIndex.Equals(3) && !Regex.IsMatch(item.Value.ToUpper(), @"\d{2,3}/\d{2}-\d{2}-\d{3}-\d{2}W\d/\d{2}"))
+                    if (!item.ColIndex.Equals(8))
                     {
                         //Not a UWI
                         currentCell.SetCellValue(item.Value);
                     }
                     else
                     {
-                        Dictionary<string, string> uwi = UWI.ParseUWIAlberta(item.Value);
+                        if (Regex.IsMatch(item.Value.ToUpper(), @"\d{2,3}/\d{2}-\d{2}-\d{3}-\d{2}W\d/\d{2}"))
+                        {
+                            Dictionary<string, string> uwi = UWI.ParseUWIAlberta(item.Value);
 
-                        currentCell.SetCellValue(uwi["wellIdent"]);
-                        currentRow.CreateCell(3).SetCellValue(uwi["wellLegalSub"]);
-                        currentRow.CreateCell(3).SetCellValue(uwi["wellSection"]);
-                        currentRow.CreateCell(3).SetCellValue(uwi["wellTownShip"]);
-                        currentRow.CreateCell(3).SetCellValue(uwi["wellRange"]);
-                        currentRow.CreateCell(3).SetCellValue(uwi["wellMeridian"]);
+                            currentCell.SetCellValue(uwi["wellIdent"]);
+                            currentRow.CreateCell(8).SetCellValue(uwi["wellLegalSub"]);
+                            currentRow.CreateCell(9).SetCellValue(uwi["wellSection"]);
+                            currentRow.CreateCell(10).SetCellValue(uwi["wellTownShip"]);
+                            currentRow.CreateCell(11).SetCellValue(uwi["wellRange"]);
+                            currentRow.CreateCell(12).SetCellValue(uwi["wellMeridian"]);
+                        }
                     }
                     
                 }

@@ -27,31 +27,34 @@
                       SelectedItem="{Binding SelectedReportTo}" DisplayMemberPath="ReportName"/>
             
             <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding ListMappingFrom}" CanUserAddRows="False"
-                      CanUserSortColumns="False">
+                      CanUserSortColumns="False" Grid.ColumnSpan="2">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn Header="Header of Source" DisplayMemberPath="Header" SelectedValuePath="Id" 
                                             SelectedValueBinding="{Binding Path=ColumnId}" Width="Auto" IsReadOnly="True">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
                                 <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedReportFrom.Columns}"/>
+                                
                             </Style>
                         </DataGridComboBoxColumn.ElementStyle>
                     </DataGridComboBoxColumn>
-                    <DataGridComboBoxColumn Header="Position in Target Report" SelectedValueBinding="{Binding Position}" Width="Auto">
+                    <DataGridComboBoxColumn Header="Header in Target Report" SelectedValueBinding="{Binding Path=Position}" Width="*"
+                                            DisplayMemberPath="Header" SelectedValuePath="Position">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ColumnNumbers}"/>
+                                <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.SelectedReportTo.Columns}"/>
+                                
                             </Style>
                         </DataGridComboBoxColumn.ElementStyle>
                         <DataGridComboBoxColumn.EditingElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ColumnNumbers}"/>
+                                <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedReportTo.Columns}"/>
                             </Style>
                         </DataGridComboBoxColumn.EditingElementStyle>
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Grid.Row="2" Grid.Column="1" AutoGenerateColumns="False" ItemsSource="{Binding ListMappingTo}" IsReadOnly="True"
+            <!--DataGrid Grid.Row="2" Grid.Column="1" AutoGenerateColumns="False" ItemsSource="{Binding ListMappingTo}" IsReadOnly="True"
                       CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn Header="Position" DisplayMemberPath="Position" SelectedValuePath="Id"
@@ -71,7 +74,7 @@
                         </DataGridComboBoxColumn.ElementStyle>
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid-->
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
                 <TextBlock Text="Path of the template:"/>
                 <TextBox Width="150" Text="{Binding FilePath}"/>
