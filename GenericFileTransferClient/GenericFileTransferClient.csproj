@@ -11,7 +11,8 @@
     <RootNamespace>GenericFileTransferClient</RootNamespace>
     <AssemblyName>GenericFileTransferClient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -50,6 +51,8 @@
     <Reference Include="NPOI">
       <HintPath>..\..\..\..\Users\regis.castaing\Desktop\npoi_1_2_4\.net 4.0\NPOI.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -77,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behavior\ValidationExceptionBehavior.cs" />
     <Compile Include="Model\TransferModel.cs" />
     <Compile Include="Service References\GenericFileTransferService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -86,10 +90,13 @@
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Utils\UWI.cs" />
     <Compile Include="ViewModel\DetailReportViewModel.cs" />
+    <Compile Include="ViewModel\FormViewModelBase.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="Behavior\IValidationExceptionHandler.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Mode.cs" />
     <Compile Include="ViewModel\TransferViewModel.cs" />
+    <Compile Include="ViewModel\ValidationViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\DetailReportView.xaml.cs">
       <DependentUpon>DetailReportView.xaml</DependentUpon>

@@ -4,6 +4,7 @@ using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GenericFileTransferClient.GenericFileTransferService;
+using System.ComponentModel.DataAnnotations;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -19,7 +20,7 @@ namespace GenericFileTransferClient.ViewModel
     /// See http://www.galasoft.ch/mvvm/getstarted
     /// </para>
     /// </summary>
-    public class DetailReportViewModel : ViewModelBase
+    public class DetailReportViewModel : FormViewModelBase
     {
         private GenericFileTransferServiceClient serviceClient = new GenericFileTransferServiceClient();
         private Report _currentReport;
@@ -60,6 +61,7 @@ namespace GenericFileTransferClient.ViewModel
 
         private string _filePath;
 
+        [Required(AllowEmptyStrings= false,ErrorMessage="Please Specify a File Path")]
         public string FilePath
         {
             get { return _filePath; }
@@ -168,7 +170,7 @@ namespace GenericFileTransferClient.ViewModel
 
         private bool CanExecuteSaveReportCommand()
         {
-            return true;
+            return this.IsValid;
         }
 
         private void ExecuteDeleteReportCommand()

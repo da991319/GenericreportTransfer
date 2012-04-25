@@ -15,7 +15,7 @@ namespace GenericFileTransferClient.ViewModel
     /// See http://www.galasoft.ch/mvvm/getstarted
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : FormViewModelBase
     {
         readonly static HomeViewModel _homeViewModel = new HomeViewModel();
         readonly DetailReportViewModel _detailReportViewModel = new DetailReportViewModel();
