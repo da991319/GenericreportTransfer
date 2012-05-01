@@ -1,10 +1,8 @@
 ﻿<Application x:Class="GenericFileTransferClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:GenericFileTransferClient.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:GenericFileTransferClient.Views"
              StartupUri="Views/MainWindow.xaml"
              mc:Ignorable="d">
     
@@ -12,16 +10,13 @@
         <!--Global View Model Locator-->
         <!--vm:ViewModelLocator x:Key="Locator"
                              d:IsDataSource="True" /-->
-        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
-            <views:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:DetailReportViewModel}">
-            <views:DetailReportView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:TransferViewModel}">
-            <views:TransferView/>
-        </DataTemplate>
-                
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PresentationFramework.Aero,Version=3.0.0.0,Culture=neutral,
+                                    PublicKeyToken=31bf3856ad364e35,processorArchitecture=MSIL;component/themes/Aero.NormalColor.xaml" />
+                <ResourceDictionary Source="Resources/MainResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
     
 </Application>

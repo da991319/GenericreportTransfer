@@ -3,11 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Behavior="clr-namespace:GenericFileTransferClient.Behavior"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:views="clr-namespace:GenericFileTransferClient.Views"     
+        xmlns:vm="clr-namespace:GenericFileTransferClient.ViewModel"
         Title="MainWindow"
         Height="600"
         Width="600">
     <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DetailReportViewModel}">
+            <views:DetailReportView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TransferViewModel}">
+            <views:TransferView/>
+        </DataTemplate>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MinWidth" Value="30"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
         <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -28,20 +50,6 @@
 							       Foreground="white">
                                 </TextBlock>
                             </Border>
-                            <!--TextBlock DockPanel.Dock="Right"
-                                       FontSize="14pt" 
-                                       Margin="-15,0,0,0" FontWeight="Bold"
-                                       Background="Red"
-                                       Width="15"
-                                       Height="15"
-                                       >!
-                            </TextBlock>
-                            <TextBlock Text="!"
-							   VerticalAlignment="center"
-							   HorizontalAlignment="center"
-							   FontWeight="Bold"
-							   Foreground="white">
-                            </TextBlock-->
                             <Border BorderBrush="Red" BorderThickness="1">
                                 <AdornedElementPlaceholder Name="controlWithError"/>
                             </Border>
@@ -49,12 +57,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <!--Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers-->
         </Style>
     </Window.Resources>
     <Grid>
