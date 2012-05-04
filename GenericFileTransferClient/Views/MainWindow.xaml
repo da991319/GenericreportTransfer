@@ -18,45 +18,8 @@
         <DataTemplate DataType="{x:Type vm:TransferViewModel}">
             <views:TransferView/>
         </DataTemplate>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="MinWidth" Value="30"/>
-        </Style>
-        <Style TargetType="{x:Type ComboBox}">
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <DockPanel LastChildFill="True">
-                            <Border DockPanel.Dock="Right"
-						        Background="Red"
-						        HorizontalAlignment="Right"
-						        VerticalAlignment="Center"
-						        Width="15"
-						        Height="15"
-						        Margin="-20,0,5,0"
-						        CornerRadius="10"
-						        ToolTip="{Binding ElementName=controlWithError, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                                <TextBlock Text="!"
-							       VerticalAlignment="center"
-							       HorizontalAlignment="center"
-							       FontWeight="Bold"
-							       Foreground="white">
-                                </TextBlock>
-                            </Border>
-                            <Border BorderBrush="Red" BorderThickness="1">
-                                <AdornedElementPlaceholder Name="controlWithError"/>
-                            </Border>
-                        </DockPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="Padding" Value="0"/>
         </Style>
     </Window.Resources>
     <Grid>

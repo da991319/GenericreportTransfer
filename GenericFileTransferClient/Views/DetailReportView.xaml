@@ -25,7 +25,7 @@
         <ComboBox Grid.ColumnSpan="2" ItemsSource="{Binding Reports}"
                   DisplayMemberPath="ReportName" SelectedItem="{Binding CurrentReport}">
             <ComboBox.Style>
-                <Style TargetType="{x:Type ComboBox}">
+                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding CurrentReport}" Value="{x:Null}">
                             <Setter Property="SelectedIndex" Value="0"/>
@@ -46,7 +46,7 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Grid Grid.Row="1" VerticalAlignment="Stretch">
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="{x:Null}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -86,7 +86,6 @@
                 <TextBox  Text="{Binding FilePath, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="Browse" Command="{Binding BrowseCommand}" HorizontalAlignment="Left" />
             </StackPanel>
-
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -101,10 +100,10 @@
             </DataGrid>
 
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+        <UniformGrid Rows="1" Columns="3" Grid.Row="2">
             <Button  Width="Auto" Command="{Binding SaveReportCommand}">
                 <Button.Style>
-                <Style TargetType="{x:Type Button}">
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Mode}">
                             <DataTrigger.Value>
@@ -125,7 +124,7 @@
                 <Button Content="Cancel" Width="Auto"/>
             <Button Content="Delete" Command="{Binding DeleteReportCommand}">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Mode}">
                                 <DataTrigger.Value>
@@ -143,6 +142,6 @@
                     </Style>
                 </Button.Style>
             </Button>
-        </StackPanel>
+        </UniformGrid>
     </Grid>
 </UserControl>
