@@ -15,7 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--ResourceDictionary Source="/PresentationFramework.Aero,Version=3.0.0.0,Culture=neutral,
                                     PublicKeyToken=31bf3856ad364e35,processorArchitecture=MSIL;component/themes/aero.normalcolor.xaml" /-->
-                <ResourceDictionary Source="Resources/BureauBlack.xaml"/>
+                <ResourceDictionary Source="Resources/UXMusingsBubbyBlue.xaml"/>
                 <ResourceDictionary Source="Resources/MainResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

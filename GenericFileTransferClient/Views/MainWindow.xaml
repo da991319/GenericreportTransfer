@@ -18,9 +18,7 @@
         <DataTemplate DataType="{x:Type vm:TransferViewModel}">
             <views:TransferView/>
         </DataTemplate>
-        <Style TargetType="{x:Type MenuItem}">
-            <Setter Property="Padding" Value="0"/>
-        </Style>
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
