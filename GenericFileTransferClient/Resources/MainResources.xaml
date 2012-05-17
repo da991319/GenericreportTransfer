@@ -6,6 +6,7 @@
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="MaxWidth" Value="100"/>
     </Style>
     <!--Style TargetType="{x:Type ComboBox}">
         <Setter Property="Margin" Value="5"/>
@@ -42,6 +43,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}" x:Key="TextBlockWrapping" >
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
 </ResourceDictionary>

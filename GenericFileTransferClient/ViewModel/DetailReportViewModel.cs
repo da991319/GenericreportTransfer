@@ -25,6 +25,8 @@ namespace GenericFileTransferClient.ViewModel
         private GenericFileTransferServiceClient serviceClient = new GenericFileTransferServiceClient();
         private Report _currentReport;
 
+        public enum ListButtons {CSV, XLS, XLSX}
+
         public Report CurrentReport
         {
             get { return _currentReport; }
@@ -65,10 +67,22 @@ namespace GenericFileTransferClient.ViewModel
         public string FilePath
         {
             get { return _filePath; }
-            set { _filePath = value; RaisePropertyChanged("FilePath"); }
+            set { _filePath = value; 
+                RaisePropertyChanged("FilePath");
+                //set the selected type of file based on name
+            }
         }
         
-        public Mode Mode { get; set; } 
+        public Mode Mode { get; set; }
+
+        private ListButtons _selectedButton;
+
+        public ListButtons SelectedButton
+        {
+            get { return _selectedButton; }
+
+            set { _selectedButton = value; RaisePropertyChanged("SelectedButton"); }
+        }
 
         #region Commands
         private RelayCommand _browseCommand;
@@ -207,10 +221,25 @@ namespace GenericFileTransferClient.ViewModel
             {
                 CurrentReport = new Report();
             }
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.xlsx$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            {
+                SelectedButton = ListButtons.XLSX;
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.csv$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            {
+                SelectedButton = ListButtons.CSV;
+            }
+            else
+            {
+                SelectedButton = ListButtons.XLS;
+            }
         }
 
         public DetailReportViewModel()
-        {}
+        {
+                    
+        }
 
         private void LoadReports()
         {
