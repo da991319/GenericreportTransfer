@@ -111,6 +111,24 @@
             <TextBlock Text="# Row Result:" Grid.Row="4"/>
             <TextBox Text="{Binding Path=CurrentReport.ResultRow}" Grid.Column="1" Grid.Row="4"/>
             <Grid Grid.Row="5" Grid.ColumnSpan="2">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedButton}">
+                                <DataTrigger.Value>
+                                    <vm:ListButtons>XLS</vm:ListButtons>
+                                </DataTrigger.Value>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedButton}">
+                                <DataTrigger.Value>
+                                    <vm:ListButtons>XLSX</vm:ListButtons>
+                                </DataTrigger.Value>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="7*"/>
@@ -119,6 +137,18 @@
                 <TextBox Text="{Binding Path=CurrentReport.Separator}" Grid.Column="1"/>
             </Grid>
             <Grid Grid.Row="6" Grid.ColumnSpan="2">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedButton}">
+                                <DataTrigger.Value>
+                                    <vm:ListButtons>CSV</vm:ListButtons>
+                                </DataTrigger.Value>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="7*"/>

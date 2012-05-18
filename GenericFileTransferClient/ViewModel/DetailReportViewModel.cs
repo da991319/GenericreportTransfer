@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GenericFileTransferClient.GenericFileTransferService;
-using System.ComponentModel.DataAnnotations;
 
 namespace GenericFileTransferClient.ViewModel
 {
@@ -23,9 +22,8 @@ namespace GenericFileTransferClient.ViewModel
     public class DetailReportViewModel : FormViewModelBase
     {
         private GenericFileTransferServiceClient serviceClient = new GenericFileTransferServiceClient();
-        private Report _currentReport;
 
-        public enum ListButtons {CSV, XLS, XLSX}
+        private Report _currentReport;
 
         public Report CurrentReport
         {
@@ -64,12 +62,25 @@ namespace GenericFileTransferClient.ViewModel
         private string _filePath;
 
         [Required(AllowEmptyStrings= false,ErrorMessage="Please Specify a File Path")]
+        [RegularExpression(@".+\.(CSV|XLS|XLSX|csv|xls|xlsx)$", ErrorMessage="The file must have a CSV, XLS or XLSX extension")]
         public string FilePath
         {
             get { return _filePath; }
             set { _filePath = value; 
                 RaisePropertyChanged("FilePath");
                 //set the selected type of file based on name
+                if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.xlsx$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                {
+                    SelectedButton = ListButtons.XLSX;
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.csv$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                {
+                    SelectedButton = ListButtons.CSV;
+                }
+                else
+                {
+                    SelectedButton = ListButtons.XLS;
+                }
             }
         }
         
@@ -220,19 +231,6 @@ namespace GenericFileTransferClient.ViewModel
             else
             {
                 CurrentReport = new Report();
-            }
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.xlsx$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-            {
-                SelectedButton = ListButtons.XLSX;
-            }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(FilePath, @"\.csv$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-            {
-                SelectedButton = ListButtons.CSV;
-            }
-            else
-            {
-                SelectedButton = ListButtons.XLS;
             }
         }
 

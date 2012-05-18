@@ -1,5 +1,5 @@
 ﻿
 namespace GenericFileTransferClient.ViewModel
 {
-    public enum Mode { Add, Edit };
+    public enum ListButtons { CSV, XLS, XLSX }
 }
