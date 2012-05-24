@@ -126,6 +126,9 @@
     <Compile Include="Views\UserControlReport.xaml.cs">
       <DependentUpon>UserControlReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControlTextBox.xaml.cs">
+      <DependentUpon>UserControlTextBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\BureauBlack.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControlReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

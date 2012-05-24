@@ -47,5 +47,34 @@
     <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}" x:Key="TextBlockWrapping" >
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
-
+  <Style x:Key="BorderReportDetail" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.Width" Value="15" />
+    <Setter Property="FrameworkElement.Height" Value="15" />
+    <Setter Property="FrameworkElement.Margin" Value="0,0,5,0" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="Border.CornerRadius" Value="10" />
+    <Setter Property="Border.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#629CDBF8" Offset="1" />
+          <GradientStop Color="#D745CAFF" Offset="0.378" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="TextBoxReportDetail" TargetType="{x:Type TextBlock}">
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.Foreground" Value="White" />
+    <Setter Property="TextBlock.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+          <GradientStop Color="#629CDBF8" Offset="1" />
+          <GradientStop Color="#D745CAFF" Offset="0.378" />
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+  </Style>
 </ResourceDictionary>

@@ -35,7 +35,6 @@ namespace GenericFileTransferClient.ViewModel
                     LoadColumns();
                     FilePath = CurrentReport.FileName;
                 }
-                
             }
         }
 
@@ -51,13 +50,6 @@ namespace GenericFileTransferClient.ViewModel
                 RaisePropertyChanged("Reports");
             }
         }
-
-        //private ObservableCollection<Column> _columns;
-
-        //public ObservableCollection<Column> Columns
-        //{
-        //    get { return _columns; }
-        //}
 
         private string _filePath;
 

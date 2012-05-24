@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="GenericFileTransferClient.Views.UserControlTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Name="GridLayout">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding Path=LabelText}" VerticalAlignment="Center" Style="{StaticResource ResourceKey=TextBlockWrapping}" />
+        <DockPanel Grid.Column="1">
+            <Border DockPanel.Dock="Right"
+						        ToolTip="" Style="{StaticResource BorderReportDetail}">
+                <TextBlock Text="?" Style="{StaticResource TextBoxReportDetail}"></TextBlock>
+            </Border>
+            <TextBox Text="{Binding Path=TextBoxText}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

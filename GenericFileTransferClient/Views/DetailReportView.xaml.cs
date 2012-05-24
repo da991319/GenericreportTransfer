@@ -23,5 +23,7 @@ namespace GenericFileTransferClient.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

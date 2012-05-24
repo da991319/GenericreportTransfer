@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GenericFileTransferClient.ViewModel"
              xmlns:Behavior="clr-namespace:GenericFileTransferClient.Behavior"
+             xmlns:views="clr-namespace:GenericFileTransferClient.Views"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600">
@@ -91,25 +92,80 @@
                 <ListBoxItem Tag="XLSX" Content="XLSX"/>
             </ListBox>
             
-            <TextBlock Text="Report Name:" Grid.Row="1"/>
-            <TextBox Grid.Column="1" Text="{Binding Path=CurrentReport.ReportName}" Grid.Row="1"/>
-            
-            
+            <!--TextBlock Text="Report Name:" Grid.Row="1"/>
+            <DockPanel Grid.Column="1" Grid.Row="1">
+                <Border DockPanel.Dock="Right"
+						        ToolTip="">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Width" Value="15"/>
+                            <Setter Property="Height" Value="15"/>
+                            <Setter Property="Margin" Value="0,0,5,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#629CDBF8" Offset="1" />
+                                        <GradientStop Color="#D745CAFF" Offset="0.378" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Border.Style>
+                    <TextBlock Text="?"
+							       VerticalAlignment="center"
+							       HorizontalAlignment="center"
+							       FontWeight="Bold"
+							       Foreground="White">
+                        <TextBlock.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#629CDBF8" Offset="1" />
+                            <GradientStop Color="#D745CAFF" Offset="0.378" />
+                        </LinearGradientBrush>
+                        </TextBlock.Background>
+                    </TextBlock>
+                </Border>
+                <TextBox Text="{Binding Path=CurrentReport.ReportName}"/>
+            </DockPanel-->
+            <views:UserControlTextBox LabelText="Report Name:" TextBoxText="{Binding Path=CurrentReport.ReportName}" Grid.Row="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="Header:" Grid.Row="2"/>
             <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=CurrentReport.Header}" 
                       VerticalContentAlignment="Stretch" VerticalAlignment="Center" Name="HeaderCheckBox"/>
 
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Visibility="{Binding IsChecked, ElementName=HeaderCheckBox, Converter={StaticResource BoolToVisConverter}}">
-                <Grid.ColumnDefinitions>
+                <!--Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="7*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="# Row Header:" Grid.Row="3" Style="{StaticResource ResourceKey=TextBlockWrapping}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=CurrentReport.HeaderRow}"/>
+                <DockPanel Grid.Column="1" Grid.Row="3">
+                    <TextBox  Text="{Binding Path=CurrentReport.HeaderRow}"/>
+                    <Border DockPanel.Dock="Right"
+						        Background="Red"
+						        HorizontalAlignment="Right"
+						        VerticalAlignment="Center"
+						        Width="15"
+						        Height="15"
+						        Margin="0,0,5,0"
+						        CornerRadius="10"
+						        ToolTip="">
+                        <TextBlock Text="!"
+							       VerticalAlignment="center"
+							       HorizontalAlignment="center"
+							       FontWeight="Bold"
+							       Foreground="white">
+                        </TextBlock>
+                    </Border>
+                </DockPanel-->
+                <views:UserControlTextBox LabelText="# Row Header:" TextBoxText="{Binding Path=CurrentReport.HeaderRow}"/>
             </Grid>
             
-            <TextBlock Text="# Row Result:" Grid.Row="4"/>
-            <TextBox Text="{Binding Path=CurrentReport.ResultRow}" Grid.Column="1" Grid.Row="4"/>
+            <!--TextBlock Text="# Row Result:" Grid.Row="4"/>
+            <TextBox Text="{Binding Path=CurrentReport.ResultRow}" Grid.Column="1" Grid.Row="4"/-->
+            <views:UserControlTextBox LabelText="# Row Result:" TextBoxText="{Binding Path=CurrentReport.ResultRow}" Grid.Row="4" Grid.ColumnSpan="2"/>
+
             <Grid Grid.Row="5" Grid.ColumnSpan="2">
                 <Grid.Style>
                     <Style TargetType="{x:Type Grid}">
@@ -129,13 +185,15 @@
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
-                <Grid.ColumnDefinitions>
+                <!--Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="7*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Separator Character:" Grid.Column="0" Style="{StaticResource ResourceKey=TextBlockWrapping}"/>
-                <TextBox Text="{Binding Path=CurrentReport.Separator}" Grid.Column="1"/>
+                <TextBox Text="{Binding Path=CurrentReport.Separator}" Grid.Column="1"/-->
+                <views:UserControlTextBox LabelText="Separator Character:" TextBoxText="{Binding Path=CurrentReport.Separator}"/>
             </Grid>
+            
             <Grid Grid.Row="6" Grid.ColumnSpan="2">
                 <Grid.Style>
                     <Style TargetType="{x:Type Grid}">
@@ -149,13 +207,15 @@
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
-                <Grid.ColumnDefinitions>
+                <!--Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="7*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Sheet Name:" Style="{StaticResource ResourceKey=TextBlockWrapping}"/>
-                <TextBox Text="{Binding Path=CurrentReport.SheetName}" Grid.Column="1"/>
+                <TextBox Text="{Binding Path=CurrentReport.SheetName}" Grid.Column="1"/-->
+                <views:UserControlTextBox LabelText="Sheet Name:" TextBoxText="{Binding Path=CurrentReport.SheetName}"/>
             </Grid>
+            
             <TextBlock Text="Path of the template:" Grid.Row="7" Grid.ColumnSpan="2"/>
             
             <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Grid.Row="8" UseLayoutRounding="False" HorizontalAlignment="Stretch" >
