@@ -47,7 +47,7 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="{x:Null}">
+        <Grid Grid.Row="1" VerticalAlignment="Stretch">
             <Grid.Resources>
                 <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
             </Grid.Resources>
